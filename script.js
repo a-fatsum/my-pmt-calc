@@ -537,5 +537,6 @@ document
 document
   .getElementById("proposedArrangement")
   .addEventListener("keyup", event_function);
+  
 
 /////////----------------------------------------///////////////
