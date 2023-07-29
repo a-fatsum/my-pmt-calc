@@ -444,7 +444,7 @@ const event_function = function () {
   document.getElementById("num_of_days").innerText = numOf_days;
   if (numOf_days > 90) {
     alert(
-      "Arrangement outside your deligations.. Approval from a lead is required "
+      "Arrangement outside your delegations.. Approval from a lead is required "
     );
   }
   //
@@ -537,6 +537,16 @@ document
 document
   .getElementById("proposedArrangement")
   .addEventListener("keyup", event_function);
-  
 
+// Clear button
+  document.getElementById("clear_button").addEventListener("click", ()=>{
+  document.getElementById("num_of_payments").innerText = "_ _ _";
+  document.getElementById("num_of_days").innerText = "_ _ _";
+  document.getElementById("arrangement-end-date").innerText = "_ _ _";
+  document.getElementById("regular-payments-resume").innerText = "_ _ _";
+  document.getElementById("additionalPaymentAmount").innerText = "_ _ _";
+  document.getElementById("arrangement-total").innerText = "_ _ _";
+  document.querySelector(".regular-payment-amount").innerText = "";
+  })
+  
 /////////----------------------------------------///////////////
