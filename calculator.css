@@ -61,7 +61,6 @@ body {
   /* IE (non-standard property) */
   image-rendering: auto;
   image-rendering: pixelated;
-
   /* <-- --> */
 }
 
@@ -806,6 +805,7 @@ input[type="date"]+label {
   display: inline-block;
   color: #ffffff;
 }
+
 
 /* Arrangement Total  */
 .arrangement-total-container {

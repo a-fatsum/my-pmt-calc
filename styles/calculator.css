@@ -94,6 +94,18 @@ body {
   /* Shift up half the height */
 }
 
+/* check contract expiry warning */
+#check-contract-expiry{
+  display: block;
+  position: absolute;
+  left: 135px;
+  bottom: 230px;
+  font-weight: 900;
+  font-size: 16px;
+  width: fit-content;
+  color: yellow;
+  border-bottom: solid 3px orange;
+}
 /* <-- ** --> */
 /* Account details <-> Payment arrangement details */
 .account-details,
@@ -128,7 +140,10 @@ body {
 }
 
 .arrears-details {
-  height: 210px;
+  /* height: 220px; */
+  height: 220px;
+  padding-top: 30px;
+
 }
 
 .payment-details {
@@ -559,6 +574,10 @@ input[type="date"]+label {
   margin-left: 16px;
   /* color: var(--color-blue); */
   color: #ffffff;
+  font-weight:900;
+  font-size: large;
+  background-color: #a27be6d3;
+  border-radius: 2px;
 }
 
 .weekly-fortnightly-tag {
@@ -807,6 +826,36 @@ input[type="date"]+label {
   color: #ffffff;
 }
 
+/* Regular payments resume */
+.regular-payments-resume-container{
+  position: relative;
+  width: 300px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  /*  */
+  margin-left: 5px;
+  /*  */
+  padding-left: 15px;
+}
+
+.regular-payments-resume-container p {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  color: rgb(20, 25, 120);
+  font-weight: 600;
+  border-bottom: solid 2.5px yellow;
+  color: var(--output-text-color);
+  padding: 5px;
+}
+
+.regular-payments-resume-container label {
+  display: inline-block;
+  color: #ffffff;
+}
+
+
 /* Arrangement Total  */
 .arrangement-total-container {
   position: relative;
@@ -839,7 +888,7 @@ input[type="date"]+label {
 /* <-- ** --> */
 /* extending arrangement-details to contain all elements  */
 .arrangement-details {
-  height: 300px;
+  height: 340px;
 }
 
 /* <---********************************************************************---> */

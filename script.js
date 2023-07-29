@@ -1,11 +1,27 @@
 "use strict";
-
+    // 
+    // check contract expiry date warning display
+    // 
+    function warningToggle() {
+      const warning = document.getElementById("check-contract-expiry");
+      if (warning.style.display === "block") {      
+        warning.style.display = "none";
+        
+      } else {
+        warning.style.display = "block";
+      }
+    }
+    // 
+    setInterval(warningToggle, 600);
+    // 
 
 // <---------^ EVENT_FUNCTION ^-------------->
 //  ------------------------------->
 const event_function = function () {
+
   // start with  values
   //
+  // const warning = document.getElementById("check-contract-expiry");
   let overdue = document.getElementById("overdue-input").value; //overdue value
   const monthlyInstalment = document.querySelector(".monthly-instalment").value; //monthly instalment value
   const instalement_Due_Day = document.querySelector(".select").value; //billing due day
@@ -19,10 +35,14 @@ const event_function = function () {
     ".weekly-fortnightly-tag"
   );
   //
-  //
   ////// late_fees
   const late_fees = 25;
   //
+
+
+
+  // 
+  // 
   new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
   // ???? overdue
@@ -65,6 +85,9 @@ const event_function = function () {
     weeklyFortnightlyTag.textContent = "fortnightly";
     weeklyFortnightlyTag.classList.remove("weekly");
     weeklyFortnightlyTag.classList.add("fortnightly");
+    // 
+    document.querySelector(".min-pref-label").innerHTML = "Minimum" 
+    document.querySelector(".min-pref-label").style.fontWeight = 900; 
     //
     // fortnightly && pref
   } else if (frequency && annualised) {
@@ -77,6 +100,10 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("weekly");
     weeklyFortnightlyTag.classList.add("fortnightly");
     //
+    document.querySelector(".min-pref-label").innerHTML = "Preferred" 
+    document.querySelector(".min-pref-label").style.fontWeight = 900; 
+    // 
+    
   }
   // weekly && min
   else if (!frequency && !annualised) {
@@ -89,6 +116,9 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
     //
+    document.querySelector(".min-pref-label").innerHTML = "Minimum" 
+    document.querySelector(".min-pref-label").style.fontWeight = 900; 
+    // 
   }
   // Weekly && Pref
   else if (!frequency && annualised) {
@@ -101,6 +131,9 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
     //
+    document.querySelector(".min-pref-label").innerHTML = "Preferred"
+    document.querySelector(".min-pref-label").style.fontWeight = 900; 
+    // 
   }
   //
   //  ///------------------***********--------------///
@@ -364,6 +397,9 @@ const event_function = function () {
     }
     // Arrangement end date
     const arr_end_date = regularDatesList[indexOfBalance];
+    // 
+    // Payments resume on
+    const paymentsResume =  regularDatesList[indexOfBalance + 1]
 
     // Number of days
     const today_date = new Date(); /////////////////////
@@ -374,12 +410,12 @@ const event_function = function () {
       (24 * 60 * 60 * 1000);
     //
     //
-    return [arr_end_date, Math.round(number_of_days)];
+    return [arr_end_date, Math.round(number_of_days), paymentsResume];
   };
   //
   //
   //
-  let [arrangement_end_date, numOf_days] = arrangement_details(
+  let [arrangement_end_date, numOf_days, Payments_resume] = arrangement_details(
     regularPaymentDates(freq, paymentStartDate),
     index_of_balance
   );
@@ -430,6 +466,19 @@ const event_function = function () {
   const endDate = day + " / " + month + " / " + year;
   document.getElementById("arrangement-end-date").innerText = endDate;
   //
+  // Payments resume on
+  const yearResume = Payments_resume.toLocaleString("default", {
+    year: "numeric",
+  });
+  const monthResume = Payments_resume.toLocaleString("default", {
+    month: "2-digit",
+  });
+  const dayResume = Payments_resume.toLocaleString("default", {
+    day: "2-digit",
+  });
+
+  const resumeDate = dayResume + " / " + monthResume + " / " + yearResume;
+  document.getElementById("regular-payments-resume").innerText = resumeDate;
   // Arrangement total
 
   // const formatter = new Intl.NumberFormat("en-US", {
