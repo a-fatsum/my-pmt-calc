@@ -547,6 +547,7 @@ document
   document.getElementById("additionalPaymentAmount").innerText = "_ _ _";
   document.getElementById("arrangement-total").innerText = "_ _ _";
   document.querySelector(".regular-payment-amount").innerText = "";
+  document.querySelector(".min-pref-label").innerText = "Minimum";
   })
   
 /////////----------------------------------------///////////////
