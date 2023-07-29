@@ -833,16 +833,12 @@ input[type="date"]+label {
   height: 40px;
   display: inline-block;
   position: relative;
-  /*  */
-  margin-left: 5px;
-  /*  */
-  padding-left: 15px;
 }
 
 .regular-payments-resume-container p {
   position: relative;
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 14px;
   color: rgb(20, 25, 120);
   font-weight: 600;
   border-bottom: solid 2.5px yellow;
@@ -853,6 +849,7 @@ input[type="date"]+label {
 .regular-payments-resume-container label {
   display: inline-block;
   color: #ffffff;
+  margin-left: 20px;
 }
 
 
