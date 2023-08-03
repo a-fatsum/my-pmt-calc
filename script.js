@@ -12,7 +12,7 @@
       }
     }
     // 
-    setInterval(warningToggle, 600);
+    // setInterval(warningToggle, 600);
     // 
 
 // <---------^ EVENT_FUNCTION ^-------------->
