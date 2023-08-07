@@ -1,24 +1,22 @@
 "use strict";
-    // 
-    // check contract expiry date warning display
-    // 
-    function warningToggle() {
-      const warning = document.getElementById("check-contract-expiry");
-      if (warning.style.display === "block") {      
-        warning.style.display = "none";
-        
-      } else {
-        warning.style.display = "block";
-      }
-    }
-    // 
-    // setInterval(warningToggle, 600);
-    // 
+//
+// check contract expiry date warning display
+//
+function warningToggle() {
+  const warning = document.getElementById("check-contract-expiry");
+  if (warning.style.display === "block") {
+    warning.style.display = "none";
+  } else {
+    warning.style.display = "block";
+  }
+}
+//
+// setInterval(warningToggle, 600);
+//
 
 // <---------^ EVENT_FUNCTION ^-------------->
 //  ------------------------------->
 const event_function = function () {
-
   // start with  values
   //
   // const warning = document.getElementById("check-contract-expiry");
@@ -39,10 +37,8 @@ const event_function = function () {
   const late_fees = 25;
   //
 
-
-
-  // 
-  // 
+  //
+  //
   new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
   // ???? overdue
@@ -85,9 +81,9 @@ const event_function = function () {
     weeklyFortnightlyTag.textContent = "fortnightly";
     weeklyFortnightlyTag.classList.remove("weekly");
     weeklyFortnightlyTag.classList.add("fortnightly");
-    // 
-    document.querySelector(".min-pref-label").innerHTML = "Minimum" 
-    document.querySelector(".min-pref-label").style.fontWeight = 900; 
+    //
+    document.querySelector(".min-pref-label").innerHTML = "Minimum";
+    document.querySelector(".min-pref-label").style.fontWeight = 900;
     //
     // fortnightly && pref
   } else if (frequency && annualised) {
@@ -100,10 +96,9 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("weekly");
     weeklyFortnightlyTag.classList.add("fortnightly");
     //
-    document.querySelector(".min-pref-label").innerHTML = "Preferred" 
-    document.querySelector(".min-pref-label").style.fontWeight = 900; 
-    // 
-    
+    document.querySelector(".min-pref-label").innerHTML = "Preferred";
+    document.querySelector(".min-pref-label").style.fontWeight = 900;
+    //
   }
   // weekly && min
   else if (!frequency && !annualised) {
@@ -116,9 +111,9 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
     //
-    document.querySelector(".min-pref-label").innerHTML = "Minimum" 
-    document.querySelector(".min-pref-label").style.fontWeight = 900; 
-    // 
+    document.querySelector(".min-pref-label").innerHTML = "Minimum";
+    document.querySelector(".min-pref-label").style.fontWeight = 900;
+    //
   }
   // Weekly && Pref
   else if (!frequency && annualised) {
@@ -131,9 +126,9 @@ const event_function = function () {
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
     //
-    document.querySelector(".min-pref-label").innerHTML = "Preferred"
-    document.querySelector(".min-pref-label").style.fontWeight = 900; 
-    // 
+    document.querySelector(".min-pref-label").innerHTML = "Preferred";
+    document.querySelector(".min-pref-label").style.fontWeight = 900;
+    //
   }
   //
   //  ///------------------***********--------------///
@@ -284,7 +279,6 @@ const event_function = function () {
 
       // if payment date is LESS than due date
       if (regularDatesList[i] < due_date) {
-
         balance -= Number(proposedArrangement);
         balances.push(balance);
       }
@@ -316,16 +310,20 @@ const event_function = function () {
     regularAmt,
     lateFees
   ) {
-
     // Find the initial Net_Balance value  if the FIRST regular date is greater than the FIRST due date
     let initNetBalance;
     if (regularDatesList[0] > dueDatesList[0]) {
-      const
-        numOfPmtsBeforeFirstDueDate = regularDatesList.filter(function (date) {
-          return date <= dueDatesList[1];
-        }).length;
+      const numOfPmtsBeforeFirstDueDate = regularDatesList.filter(function (
+        date
+      ) {
+        return date <= dueDatesList[1];
+      }).length;
       initNetBalance = Number(overDue) + lateFees + Number(monthlyAmt);
-      initNetBalance = (initNetBalance + Number(monthlyAmt) + Number(lateFees)) - (Number(regularAmt) * numOfPmtsBeforeFirstDueDate)
+      initNetBalance =
+        initNetBalance +
+        Number(monthlyAmt) +
+        Number(lateFees) -
+        Number(regularAmt) * numOfPmtsBeforeFirstDueDate;
     }
     // CONDITION:: if FIRST reguldar date is greater than FIRST due date !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -334,24 +332,32 @@ const event_function = function () {
     const net_balances = [];
     //
     for (let i = 0, c = 0; i < regularDatesList.length; i++) {
-
       if (regularDatesList[i] < dueDatesList[c]) {
         //
         const filteredList = copyOfRegularDates.filter(function (dte) {
           return dte <= dueDatesList[c];
-        })
-        numOfPmtsBeforeFirstDueDate.push(Number(filteredList.length))
+        });
+        numOfPmtsBeforeFirstDueDate.push(Number(filteredList.length));
         copyOfRegularDates.shift();
-        net_balances.push((Number(balancesList[i]) + Number(lateFees) + Number(monthlyAmt)) - (Number(regularAmt) * (Number(numOfPmtsBeforeFirstDueDate[i] - 1))))
-      }
-      else if (regularDatesList[i] >= dueDatesList[c]) {
+        net_balances.push(
+          Number(balancesList[i]) +
+            Number(lateFees) +
+            Number(monthlyAmt) -
+            Number(regularAmt) * Number(numOfPmtsBeforeFirstDueDate[i] - 1)
+        );
+      } else if (regularDatesList[i] >= dueDatesList[c]) {
         c++;
         const filteredList = copyOfRegularDates.filter(function (dte) {
           return dte <= dueDatesList[c];
-        })
-        numOfPmtsBeforeFirstDueDate.push(filteredList.length)
+        });
+        numOfPmtsBeforeFirstDueDate.push(filteredList.length);
         copyOfRegularDates.shift();
-        net_balances.push((Number(balancesList[i]) + Number(lateFees) + Number(monthlyAmt)) - (Number(regularAmt) * (Number(numOfPmtsBeforeFirstDueDate[i]) - 1)))
+        net_balances.push(
+          Number(balancesList[i]) +
+            Number(lateFees) +
+            Number(monthlyAmt) -
+            Number(regularAmt) * (Number(numOfPmtsBeforeFirstDueDate[i]) - 1)
+        );
       }
     }
     return [net_balances, numOfPmtsBeforeFirstDueDate];
@@ -393,13 +399,13 @@ const event_function = function () {
   const arrangement_details = function (regularDatesList, indexOfBalance) {
     //
     if (indexOfBalance < 0) {
-      indexOfBalance = 0
+      indexOfBalance = 0;
     }
     // Arrangement end date
     const arr_end_date = regularDatesList[indexOfBalance];
-    // 
+    //
     // Payments resume on
-    const paymentsResume =  regularDatesList[indexOfBalance + 1]
+    const paymentsResume = regularDatesList[indexOfBalance + 1];
 
     // Number of days
     const today_date = new Date(); /////////////////////
@@ -434,7 +440,6 @@ const event_function = function () {
   } catch (error) {
     //
   }
-  // =--------_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_------= //
   //-                 --            Display results             --                      -//
 
   // Number of payments
@@ -480,14 +485,6 @@ const event_function = function () {
   const resumeDate = dayResume + " / " + monthResume + " / " + yearResume;
   document.getElementById("regular-payments-resume").innerText = resumeDate;
   // Arrangement total
-
-  // const formatter = new Intl.NumberFormat("en-US", {
-  //   style: "currency",
-  //   currency: "AUD",
-  // });
-
-  // console.log(new Intl.NumberFormat().format(2500)); /* $2,500.00 */
-
   // Arrangement total
   const arrangement_total = numOf_payments * proposedArrangement;
   document.getElementById(
@@ -499,6 +496,15 @@ const event_function = function () {
   //
 };
 // --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+// =--------_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_------= //
+// --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+// --------------------------------------------------------------------------------- //
+
 // Frequency toggle
 document
   .querySelector(".frequency-input")
@@ -539,7 +545,7 @@ document
   .addEventListener("keyup", event_function);
 
 // Clear button
-  document.getElementById("clear_button").addEventListener("click", ()=>{
+document.getElementById("clear_button").addEventListener("click", () => {
   document.getElementById("num_of_payments").innerText = "_ _ _";
   document.getElementById("num_of_days").innerText = "_ _ _";
   document.getElementById("arrangement-end-date").innerText = "_ _ _";
@@ -548,6 +554,6 @@ document
   document.getElementById("arrangement-total").innerText = "_ _ _";
   document.querySelector(".regular-payment-amount").innerText = "";
   document.querySelector(".min-pref-label").innerText = "Minimum";
-  })
-  
+});
+
 /////////----------------------------------------///////////////
