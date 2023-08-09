@@ -32,20 +32,22 @@ body {
 
   background-image: url(../images/layered-waves-haikei-higher-5.svg),
     /*  */
-    linear-gradient(105deg,
-      rgb(152, 182, 251) 0%,
-      hsl(223deg 87% 84%) 6%,
-      hsl(223deg 77% 88%) 12%,
-      hsl(223deg 50% 93%) 21%,
-      hsl(224deg 50% 95%) 32%,
-      hsl(224deg 50% 98%) 47%,
-      hsl(0deg 0% 100%) 61%,
-      hsl(297deg 67% 98%) 72%,
-      hsl(296deg 67% 97%) 80%,
-      hsl(296deg 67% 95%) 86%,
-      hsl(299deg 50% 92%) 91%,
-      hsl(303deg 46% 89%) 96%,
-      hsl(305deg 44% 85%) 100%);
+      linear-gradient(
+        105deg,
+        rgb(152, 182, 251) 0%,
+        hsl(223deg 87% 84%) 6%,
+        hsl(223deg 77% 88%) 12%,
+        hsl(223deg 50% 93%) 21%,
+        hsl(224deg 50% 95%) 32%,
+        hsl(224deg 50% 98%) 47%,
+        hsl(0deg 0% 100%) 61%,
+        hsl(297deg 67% 98%) 72%,
+        hsl(296deg 67% 97%) 80%,
+        hsl(296deg 67% 95%) 86%,
+        hsl(299deg 50% 92%) 91%,
+        hsl(303deg 46% 89%) 96%,
+        hsl(305deg 44% 85%) 100%
+      );
   /*  */
   background-repeat: no-repeat, repeat;
   background-position: center;
@@ -95,7 +97,7 @@ body {
 }
 
 /* check contract expiry warning */
-#check-contract-expiry{
+#check-contract-expiry {
   display: block;
   position: absolute;
   left: 135px;
@@ -134,16 +136,17 @@ body {
   padding-top: 10px;
   border: none;
   border-radius: 25px;
-  background-image: linear-gradient(270deg,
-      hsla(263, 58%, 47%, 0.916) 0%,
-      hsla(226, 36%, 49%, 0) 100%);
+  background-image: linear-gradient(
+    270deg,
+    hsla(263, 58%, 47%, 0.916) 0%,
+    hsla(226, 36%, 49%, 0) 100%
+  );
 }
 
 .arrears-details {
   /* height: 220px; */
   height: 220px;
   padding-top: 30px;
-
 }
 
 .payment-details {
@@ -210,8 +213,8 @@ body {
   transition: all 0.4s ease;
 }
 
-.monthly-amount-container input:valid+.label .content-name::after,
-.overdue-container input:valid+.label .content-name::after {
+.monthly-amount-container input:valid + .label .content-name::after,
+.overdue-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
   bottom: -18.5px;
@@ -220,20 +223,20 @@ body {
   color: var(--color-blue);
 }
 
-.overdue-container input:valid+.label .content-name::after {
+.overdue-container input:valid + .label .content-name::after {
   color: var(--toyota-red);
 }
 
-.overdue-container input:focus+.label .content-name,
-.overdue-container input:valid+.label .content-name {
+.overdue-container input:focus + .label .content-name,
+.overdue-container input:valid + .label .content-name {
   padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
   color: #ff0000;
 }
 
-.overdue-container input:focus+.label::after,
-.overdue-container input:valid+.label::after {
+.overdue-container input:focus + .label::after,
+.overdue-container input:valid + .label::after {
   transform: translateX(0%);
 }
 
@@ -256,8 +259,8 @@ body {
   transition: all 0.3s ease;
 }
 
-.monthly-amount-container input:focus+.label .content-name,
-.monthly-amount-container input:valid+.label .content-name {
+.monthly-amount-container input:focus + .label .content-name,
+.monthly-amount-container input:valid + .label .content-name {
   padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
@@ -265,8 +268,8 @@ body {
   color: var(--button--color);
 }
 
-.monthly-amount-container input:focus+.label::after,
-.monthly-amount-container input:valid+.label::after {
+.monthly-amount-container input:focus + .label::after,
+.monthly-amount-container input:valid + .label::after {
   transform: translateX(0%);
 }
 
@@ -333,7 +336,7 @@ input[type="checkbox"].frequency-input {
   top: -9000;
 }
 
-input[type="checkbox"].frequency-input+label {
+input[type="checkbox"].frequency-input + label {
   display: flex;
   position: relative;
   font-size: 16px;
@@ -354,7 +357,7 @@ input[type="checkbox"].frequency-input+label {
   /* Internet Explorer/Edge */
 }
 
-input[type="checkbox"].frequency-input+label::before {
+input[type="checkbox"].frequency-input + label::before {
   content: "";
   text-align: left;
   display: flex;
@@ -378,7 +381,7 @@ input[type="checkbox"].frequency-input+label::before {
   /*<--- Margin for Label*/
 }
 
-input[type="checkbox"].frequency-input+label::after {
+input[type="checkbox"].frequency-input + label::after {
   position: absolute;
   display: flex;
   /*<<----- TO CENTER CONTENTS */
@@ -405,13 +408,13 @@ input[type="checkbox"].frequency-input+label::after {
   transition: all 0.4s ease;
 }
 
-input[type="checkbox"].frequency-input:checked+label::before {
+input[type="checkbox"].frequency-input:checked + label::before {
   /* <<<<--- BEFORE + checked property */
   content: "";
   background-color: #ffffff;
 }
 
-input[type="checkbox"].frequency-input:checked+label::after {
+input[type="checkbox"].frequency-input:checked + label::after {
   /* <<<<---  AFTER + checked property */
   background-color: #ffffff;
   transform: translateX(100%);
@@ -489,12 +492,12 @@ input[type="checkbox"].frequency-input:checked+label::after {
   transition: all 0.4s ease;
 }
 
-.checkbox:checked+.toggle p {
+.checkbox:checked + .toggle p {
   left: 13px;
 }
 
 /* Checkbox checked effect */
-.checkbox:checked+.toggle::after {
+.checkbox:checked + .toggle::after {
   left: 1.5px;
 }
 
@@ -548,7 +551,7 @@ input[type="checkbox"].frequency-input:checked+label::after {
   cursor: pointer;
 }
 
-input[type="date"]+label {
+input[type="date"] + label {
   display: inline-block;
   margin-left: 30px;
   /* color: var(--color-blue); */
@@ -574,7 +577,7 @@ input[type="date"]+label {
   margin-left: 16px;
   /* color: var(--color-blue); */
   color: #ffffff;
-  font-weight:900;
+  font-weight: 900;
   font-size: large;
   background-color: #a27be6d3;
   border-radius: 2px;
@@ -620,7 +623,6 @@ input[type="date"]+label {
   background-color: var(--button--color);
   transition: all 0.4s ease;
 }
-
 
 /* Payment arrangement details */
 
@@ -678,7 +680,7 @@ input[type="date"]+label {
   transition: all 0.4s ease;
 }
 
-.proposed-payment-container input:valid+.label .content-name::after {
+.proposed-payment-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
   bottom: -18.5px;
@@ -686,16 +688,16 @@ input[type="date"]+label {
   font-weight: 500;
 }
 
-.proposed-payment-container input:focus+.label .content-name,
-.proposed-payment-container input:valid+.label .content-name {
+.proposed-payment-container input:focus + .label .content-name,
+.proposed-payment-container input:valid + .label .content-name {
   padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
   color: var(--color-blue);
 }
 
-.proposed-payment-container input:focus+.label::after,
-.proposed-payment-container input:valid+.label::after {
+.proposed-payment-container input:focus + .label::after,
+.proposed-payment-container input:valid + .label::after {
   transform: translateX(0%);
 }
 
@@ -827,7 +829,7 @@ input[type="date"]+label {
 }
 
 /* Regular payments resume */
-.regular-payments-resume-container{
+.regular-payments-resume-container {
   position: relative;
   width: 300px;
   height: 40px;
@@ -851,7 +853,6 @@ input[type="date"]+label {
   color: #ffffff;
   margin-left: 20px;
 }
-
 
 /* Arrangement Total  */
 .arrangement-total-container {
@@ -883,34 +884,34 @@ input[type="date"]+label {
 }
 
 /* Clear button */
-  #clear_button{
-    width: fit-content;
-    display: block;
-    position: relative;
-    margin-left: 185px;
-    border-radius: 10px;
-    /*  */
-    box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.44);
-    -webkit-box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.44);
-    -moz-box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.44);
-  }
+#clear_button {
+  width: fit-content;
+  display: block;
+  position: relative;
+  margin-left: 185px;
+  border-radius: 10px;
+  /*  */
+  box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.44);
+  -webkit-box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.44);
+  -moz-box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.44);
+}
 
-  #clear_button button{
-    display: block;
-    position: relative;
-    background-color: rgba(255, 255, 0, 0.144);
-    color: #ffffff;
-    font-weight:bold;
-    letter-spacing: 3px;
-    font-size: var(--input-font-size);
-    /* font-size: 16px; */
-    border: none;
-    border-radius: 10px;
-    height: 30px;
-    width: 100px;
-    cursor: pointer;
-    margin-top: 30px;
-  }
+#clear_button button {
+  display: block;
+  position: relative;
+  background-color: rgba(255, 255, 0, 0.144);
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: var(--input-font-size);
+  /* font-size: 16px; */
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 100px;
+  cursor: pointer;
+  margin-top: 30px;
+}
 /* <-- ** --> */
 /* extending arrangement-details to contain all elements  */
 .arrangement-details {

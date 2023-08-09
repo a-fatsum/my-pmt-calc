@@ -1,188 +1,212 @@
 <!DOCTYPE html>
 
 <html>
-<header>
-  <title>My Calculator</title>
-  <link rel="stylesheet" href="styles/calculator.css" />  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&family=Roboto:wght@400;700;900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-</header>
+  <header>
+    <title>My Calculator</title>
+    <link rel="stylesheet" href="styles/calculator.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&family=Roboto:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </header>
 
-<body>
-  <!-- Account Details -->
+  <body>
+    <!-- Account Details -->
 
-  <form id="form">
-    <fieldset class="account-details">
-      <legend class="outer-legend">Account details</legend>
-      <fieldset class="arrears-details">
-        <legend class="inner-legend">Arrears</legend>
+    <form id="form">
+      <fieldset class="account-details">
+        <legend class="outer-legend">Account details</legend>
+        <fieldset class="arrears-details">
+          <legend class="inner-legend">Arrears</legend>
 
-        <div id="check-contract-expiry">Check contract expiry date</div>
+          <div id="check-contract-expiry">Check contract expiry date</div>
 
-        <!-- OVERDUE -->
-        <!--  -->
-        <div class="overdue-container">
-          <input id="overdue-input" name="input-name" autocomplete=" off" type="text" maxlength="7" required />
-          <label for="input-name" class="label">
-            <span class="content-name">Overdue amount</span>
+          <!-- OVERDUE -->
+          <!--  -->
+          <div class="overdue-container">
+            <input
+              id="overdue-input"
+              name="input-name"
+              autocomplete=" off"
+              type="text"
+              maxlength="7"
+              required
+            />
+            <label for="input-name" class="label">
+              <span class="content-name">Overdue amount</span>
+            </label>
+          </div>
+
+          <!--  -->
+          <!-- MONTHLY AMOUNT -->
+          <div class="monthly-amount-container">
+            <input
+              class="monthly-instalment"
+              name="input-name"
+              autocomplete=" off"
+              type="text"
+              maxlength="7"
+              required
+            />
+            <label for="input-name" class="label">
+              <span class="content-name">Monthly amount</span>
+            </label>
+          </div>
+
+          <!-- DROP-DOWN -->
+          <!-- <div class="dropdown"> -->
+          <div class="wrapper">
+            <select id="dropdown-list" class="select">
+              <!-- <div class="dropdown-content"> -->
+              <option disabled selected>Billing due day</option>
+              <option class="option" value="1">1</option>
+              <option class="option" value="2">2</option>
+              <option class="option" value="3">3</option>
+              <option class="option" value="4">4</option>
+              <option class="option" value="5">5</option>
+              <option class="option" value="6">6</option>
+              <option class="option" value="7">7</option>
+              <option class="option" value="8">8</option>
+              <option class="option" value="9">9</option>
+              <option class="option" value="10">10</option>
+              <option class="option" value="11">11</option>
+              <option class="option" value="12">12</option>
+              <option class="option" value="13">13</option>
+              <option class="option" value="14">14</option>
+              <option class="option" value="15">15</option>
+              <option class="option" value="16">16</option>
+              <option class="option" value="17">17</option>
+              <option class="option" value="18">18</option>
+              <option class="option" value="19">19</option>
+              <option class="option" value="20">20</option>
+              <option class="option" value="21">21</option>
+              <option class="option" value="22">22</option>
+              <option class="option" value="23">23</option>
+              <option class="option" value="24">24</option>
+              <option class="option" value="25">25</option>
+              <option class="option" value="26">26</option>
+              <option class="option" value="27">27</option>
+              <option class="option" value="28">28</option>
+              <option class="option" value="29">29</option>
+              <option class="option" value="30">30</option>
+              <option class="option" value="30">31</option>
+              <!-- </div> -->
+            </select>
+          </div>
+
+          <!-- </div> -->
+        </fieldset>
+
+        <fieldset class="payment-details">
+          <legend class="inner-legend">Current payment details</legend>
+
+          <!-- FREQUENCY TOGGLE -->
+          <div class="frequency-toggle-container">
+            <input class="frequency-input" id="check" type="checkbox" />
+            <label for="check">Frequency</label>
+          </div>
+
+          <!-- min-pref toggle button -->
+          <input type="checkbox" id="toggle_checkBox" class="checkbox" />
+          <label for="toggle_checkBox" class="toggle">
+            <p>min &nbsp;&nbsp; pref</p>
           </label>
-        </div>
-
-        <!--  -->
-        <!-- MONTHLY AMOUNT -->
-        <div class="monthly-amount-container">
-          <input class="monthly-instalment" name="input-name" autocomplete=" off" type="text" maxlength="7" required />
-          <label for="input-name" class="label">
-            <span class="content-name">Monthly amount</span>
+          <label for="toggle_checkBox" class="min-pref-label">
+            min | pref
           </label>
-        </div>
 
-        <!-- DROP-DOWN -->
-        <!-- <div class="dropdown"> -->
-        <div class="wrapper">
-          <select id="dropdown-list" class="select">
-            <!-- <div class="dropdown-content"> -->
-            <option disabled selected>Billing due day</option>
-            <option class="option" value="1">1</option>
-            <option class="option" value="2">2</option>
-            <option class="option" value="3">3</option>
-            <option class="option" value="4">4</option>
-            <option class="option" value="5">5</option>
-            <option class="option" value="6">6</option>
-            <option class="option" value="7">7</option>
-            <option class="option" value="8">8</option>
-            <option class="option" value="9">9</option>
-            <option class="option" value="10">10</option>
-            <option class="option" value="11">11</option>
-            <option class="option" value="12">12</option>
-            <option class="option" value="13">13</option>
-            <option class="option" value="14">14</option>
-            <option class="option" value="15">15</option>
-            <option class="option" value="16">16</option>
-            <option class="option" value="17">17</option>
-            <option class="option" value="18">18</option>
-            <option class="option" value="19">19</option>
-            <option class="option" value="20">20</option>
-            <option class="option" value="21">21</option>
-            <option class="option" value="22">22</option>
-            <option class="option" value="23">23</option>
-            <option class="option" value="24">24</option>
-            <option class="option" value="25">25</option>
-            <option class="option" value="26">26</option>
-            <option class="option" value="27">27</option>
-            <option class="option" value="28">28</option>
-            <option class="option" value="29">29</option>
-            <option class="option" value="30">30</option>
-            <option class="option" value="31">31</option>
-            <!-- </div> -->
-          </select>
-        </div>
+          <!-- Date Picker -->
+          <div>
+            <input class="date-picker" type="date" />
+            <label id="payment-date-label">Payment start date</label>
+          </div>
 
-        <!-- </div> -->
+          <!--  -->
+          <!-- current payment Display -->
+          <p class="regular-payment-amount"></p>
+          <tag class="regular-payment">Regular payment</tag>
+          <tag class="weekly-fortnightly-tag"></tag>
+        </fieldset>
       </fieldset>
 
-      <fieldset class="payment-details">
-        <legend class="inner-legend">Current payment details</legend>
+      <!-- ///////////////////////////////////////// -->
+      <!-- Payment Arrangement Details -->
+      <fieldset class="arrangement-details-container">
+        <legend class="outer-legend">Payment arrangement details</legend>
+        <div class="arrangement-details">
+          <!-- <div class="proposed-payment-container"> 
+</div> -->
 
-        <!-- FREQUENCY TOGGLE -->
-        <div class="frequency-toggle-container">
-          <input class="frequency-input" id="check" type="checkbox" />
-          <label for="check">Frequency</label>
+          <!-- ****************** PROPOSED AMOUNT ************************** -->
+          <div class="proposed-payment-container">
+            <input
+              id="proposedArrangement"
+              name="input-name"
+              autocomplete=" off"
+              type="text"
+              maxlength="7"
+              required
+            />
+            <label for="input-name" class="label">
+              <span class="content-name">Proposed amount</span>
+            </label>
+          </div>
+          <!-- ************************************************************ -->
+          <!--  -->
+          <!-- <div class="number-of-payments-container">-->
+          <div class="number-of-payments-container">
+            <label> Number of payments</label>
+            <p id="num_of_payments"></p>
+          </div>
+
+          <!-- <div class="number-of-days-container">
+</div> -->
+          <div class="number-of-days-container">
+            <label> Number of days</label>
+            <p id="num_of_days"></p>
+          </div>
+
+          <!-- <div class="aditional-amount-container">
+</div> -->
+          <div class="aditional-amount-container">
+            <label> Aditional amount</label>
+            <p id="additionalPaymentAmount"></p>
+          </div>
+
+          <!-- <div class="end-date-container">
+</div> -->
+          <div class="arrangement-end-date-container">
+            <label> Arrangement end date </label>
+            <p id="arrangement-end-date">_ _ _</p>
+          </div>
+
+          <!-- Regular payment resume date -->
+          <div class="regular-payments-resume-container">
+            <label> Payments resume on</label>
+            <p id="regular-payments-resume">_ _ _</p>
+          </div>
+
+          <!-- Arrangement total -->
+          <div class="arrangement-total-container">
+            <label> Arrangement total </label>
+            <p id="arrangement-total"></p>
+          </div>
+
+          <!-- Clear button -->
+          <div id="clear_button">
+            <button type="reset">CLEAR</button>
+          </div>
+          <!--  -->
         </div>
-
-        <!-- min-pref toggle button -->
-        <input type="checkbox" id="toggle_checkBox" class="checkbox" />
-        <label for="toggle_checkBox" class="toggle">
-          <p>min &nbsp;&nbsp; pref</p>
-        </label>
-        <label for="toggle_checkBox" class="min-pref-label">
-          min | pref
-        </label>
-
-        <!-- Date Picker -->
-        <div>
-          <input class="date-picker" type="date" />
-          <label id="payment-date-label">Payment start date</label>
-        </div>
-
-        <!--  -->
-        <!-- current payment Display -->
-        <p class="regular-payment-amount"></p>
-        <tag class="regular-payment">Regular payment</tag>
-        <tag class="weekly-fortnightly-tag"></tag>
       </fieldset>
-    </fieldset>
-
-    <!-- ///////////////////////////////////////// -->
-    <!-- Payment Arrangement Details -->
-    <fieldset class="arrangement-details-container">
-      <legend class="outer-legend">Payment arrangement details</legend>
-      <div class="arrangement-details">
-        <!-- <div class="proposed-payment-container"> 
-</div> -->
-
-        <!-- ****************** PROPOSED AMOUNT ************************** -->
-        <div class="proposed-payment-container">
-          <input id="proposedArrangement" name="input-name" autocomplete=" off" type="text" maxlength="7" required />
-          <label for="input-name" class="label">
-            <span class="content-name">Proposed amount</span>
-          </label>
-        </div>
-        <!-- ************************************************************ -->
-        <!--  -->
-        <!-- <div class="number-of-payments-container">-->
-        <div class="number-of-payments-container">
-          <label> Number of payments</label>
-          <p id="num_of_payments"></p>
-        </div>
-
-        <!-- <div class="number-of-days-container">
-</div> -->
-        <div class="number-of-days-container">
-          <label> Number of days</label>
-          <p id="num_of_days"></p>
-        </div>
-
-        <!-- <div class="aditional-amount-container">
-</div> -->
-        <div class="aditional-amount-container">
-          <label> Aditional amount</label>
-          <p id="additionalPaymentAmount"></p>
-        </div>
-
-        <!-- <div class="end-date-container">
-</div> -->
-        <div class="arrangement-end-date-container">
-          <label> Arrangement end date </label>
-          <p id="arrangement-end-date">_ _ _</p>
-        </div>
-
-        <!-- Regular payment resume date -->
-        <div class="regular-payments-resume-container">
-          <label> Payments resume on</label>
-          <p id="regular-payments-resume">_ _ _</p>
-        </div>
-
-        <!-- Arrangement total -->
-        <div class="arrangement-total-container">
-          <label> Arrangement total </label>
-          <p id="arrangement-total"></p>
-        </div>
-
-        <!-- Clear button -->
-        <div id="clear_button">
-          <button type="reset">CLEAR</button>
-        </div>
-        <!--  -->
-      </div>
-    </fieldset>
-  </form>
-  <script src="script.js"></script>
-  <!-- <script src="app.js"></script> -->
-</body>
-
+    </form>
+    <script src="script.js"></script>
+    <!-- <script src="app.js"></script> -->
+  </body>
 </html>
