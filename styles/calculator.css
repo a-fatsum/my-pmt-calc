@@ -912,6 +912,11 @@ input[type="date"] + label {
   cursor: pointer;
   margin-top: 30px;
 }
+
+#clear_button button:hover {
+  color: orange;
+  background-color: rgba(153, 205, 50, 0.381);
+}
 /* <-- ** --> */
 /* extending arrangement-details to contain all elements  */
 .arrangement-details {
