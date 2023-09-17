@@ -906,11 +906,9 @@ input[type="date"] + label {
   .account-details {
     background-color: #272737;
     height: auto;
-    /* width: 400px; */
   }
   .arrangement-details-container {
     background-color: #272737;
     height: auto;
-    /* width: 400px; */
   }
 }
