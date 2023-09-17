@@ -12,10 +12,8 @@
   /* --toyota-red: #4d22c2; */
   --toyota-red: #ff0000;
 
-  /* --button--color: #4d22c2; */
-  --button--color: #00c16e;
-  /* --legend-text-color: #3502a4dc; */
-  --legend-text-color: #00c16e;
+  --button--color: #4d22c2;
+  --legend-text-color: #3502a4dc;
 
   --color-blue: #505299;
   --output-text-color: #ffffff;
@@ -30,7 +28,43 @@
 
 body {
   font-family: Roboto, Arial;
-  background-color: #272737;
+  padding-bottom: 80px;
+
+  background-image: url(../images/layered-waves-haikei-higher-5.svg),
+    /*  */
+      linear-gradient(
+        105deg,
+        rgb(152, 182, 251) 0%,
+        hsl(223deg 87% 84%) 6%,
+        hsl(223deg 77% 88%) 12%,
+        hsl(223deg 50% 93%) 21%,
+        hsl(224deg 50% 95%) 32%,
+        hsl(224deg 50% 98%) 47%,
+        hsl(0deg 0% 100%) 61%,
+        hsl(297deg 67% 98%) 72%,
+        hsl(296deg 67% 97%) 80%,
+        hsl(296deg 67% 95%) 86%,
+        hsl(299deg 50% 92%) 91%,
+        hsl(303deg 46% 89%) 96%,
+        hsl(305deg 44% 85%) 100%
+      );
+  /*  */
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-size: cover;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  /* Firefox */
+  image-rendering: -o-crisp-edges;
+  /* Opera */
+  image-rendering: -webkit-optimize-contrast;
+  /* Webkit (non-standard naming)*/
+  -ms-interpolation-mode: nearest-neighbor;
+  /* IE (non-standard property) */
+  image-rendering: auto;
+  image-rendering: pixelated;
+
+  /* <-- --> */
 }
 
 .outer-legend {
@@ -49,11 +83,17 @@ body {
 /* <-- ** --> */
 /* FORM */
 #form {
+  /* To center the form when the window is resized */
   position: relative;
-  /* top: 55px; */
+  left: 50%;
+  /* Start with top left in the center */
+  top: 55px;
   width: 400px;
-  margin: auto;
-  height: 100%;
+  /* The fixed width... */
+  margin-left: -215px;
+  /* Shift over half the width */
+  margin-top: -50px;
+  /* Shift up half the height */
 }
 
 /* check contract expiry warning */
@@ -62,6 +102,7 @@ body {
   position: absolute;
   left: 135px;
   bottom: 230px;
+  font-weight: 900;
   font-size: 16px;
   width: fit-content;
   color: yellow;
@@ -87,28 +128,25 @@ body {
 .arrears-details,
 .payment-details,
 .arrangement-details {
-  /* margin: 15px; */
+  margin: 15px;
   box-shadow: var(--box-shadow-container);
   position: relative;
   height: 230px;
   padding: 20px;
   padding-top: 10px;
   border: none;
-  border-radius: 5px;
-  background-color: #404056;
-
-  /* background-image: linear-gradient(
+  border-radius: 25px;
+  background-image: linear-gradient(
     270deg,
     hsla(263, 58%, 47%, 0.916) 0%,
     hsla(226, 36%, 49%, 0) 100%
-  ); */
+  );
 }
 
 .arrears-details {
   /* height: 220px; */
   height: 220px;
   padding-top: 30px;
-  margin-bottom: 20px;
 }
 
 .payment-details {
@@ -129,7 +167,7 @@ body {
   overflow: hidden;
   /* width: fit-content; */
   margin-left: 15px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #ffffff;
 }
 
@@ -179,7 +217,7 @@ body {
 .overdue-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
-  bottom: -25px;
+  bottom: -18.5px;
   left: 15px;
   font-weight: 500;
   color: var(--color-blue);
@@ -191,7 +229,7 @@ body {
 
 .overdue-container input:focus + .label .content-name,
 .overdue-container input:valid + .label .content-name {
-  padding-bottom: -3px;
+  padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
   color: #ff0000;
@@ -216,14 +254,14 @@ body {
 
 .content-name {
   position: absolute;
-  bottom: 15px;
+  bottom: 5px;
   left: 10px;
   transition: all 0.3s ease;
 }
 
 .monthly-amount-container input:focus + .label .content-name,
 .monthly-amount-container input:valid + .label .content-name {
-  padding-bottom: -3px;
+  padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
   /* Monthly amount text */
@@ -242,7 +280,7 @@ body {
 .select {
   height: 40px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 10px;
   /* background-color: #ede9ff; */
   background-color: #ffff;
   width: 155px;
@@ -338,7 +376,7 @@ input[type="checkbox"].frequency-input + label::before {
   -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.336) inset;
   -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.336) inset;
   /*  */
-  border-radius: 5px;
+  border-radius: 0.7em;
   margin-right: 3em;
   /*<--- Margin for Label*/
 }
@@ -364,7 +402,7 @@ input[type="checkbox"].frequency-input + label::after {
   /*  */
   /*  */
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0.6em;
   filter: drop-shadow(0px 0px 1px #0000009a);
   box-shadow: -3px 0px 5px -3px black, 3px 0px 5px -3px black;
   transition: all 0.4s ease;
@@ -503,7 +541,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
   margin-bottom: 20px;
   margin-top: 45px;
   padding-left: 2px;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: var(--box-shadow-button);
   border: none;
   outline: none;
@@ -541,6 +579,7 @@ input[type="date"] + label {
   color: #ffffff;
   font-weight: 900;
   font-size: large;
+  background-color: #a27be6d3;
   border-radius: 2px;
 }
 
@@ -549,7 +588,7 @@ input[type="date"] + label {
   position: absolute;
   width: fit-content;
   top: 188px;
-  /* left: 105px; */
+  left: 105px;
   border-radius: 5px;
   transition: all 0.4s ease;
 }
@@ -559,7 +598,7 @@ input[type="date"] + label {
   position: absolute;
   width: fit-content;
   padding: 5px;
-  left: 110px;
+  left: 105px;
   top: 188px;
   /* bottom: 32px; */
   font-size: var(--input-font-size);
@@ -574,7 +613,7 @@ input[type="date"] + label {
   display: inline-block;
   position: absolute;
   padding: 5px;
-  left: 110px;
+  left: 105px;
   top: 188px;
   /* bottom: 32px; */
   border: solid 2px var(--button--color);
@@ -598,7 +637,7 @@ input[type="date"] + label {
   box-shadow: var(--box-shadow-button);
   overflow: hidden;
   margin-left: 15px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #ffffff;
 }
 
@@ -644,14 +683,14 @@ input[type="date"] + label {
 .proposed-payment-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
-  bottom: -24px;
+  bottom: -18.5px;
   left: 15px;
   font-weight: 500;
 }
 
 .proposed-payment-container input:focus + .label .content-name,
 .proposed-payment-container input:valid + .label .content-name {
-  /* padding-bottom: 3px; */
+  padding-bottom: 3px;
   transform: translateY(-100%);
   font-size: var(--input-font-size);
   color: var(--color-blue);
@@ -886,29 +925,3 @@ input[type="date"] + label {
 
 /* <---********************************************************************---> */
 /* <---********************************************************************---> */
-/* Media queries */
-@media only screen and (max-width: 600px) {
-  body {
-    background-color: #272737;
-  }
-  #form {
-    height: 100%;
-    width: 100%;
-  }
-  .arrears-details,
-  .payment-details,
-  .arrangement-details {
-    margin: auto;
-    background-color: #404056;
-  }
-  .payment-details {
-    margin-top: 10px;
-  }
-  .account-details {
-    background-color: #272737;
-    height: auto;
-  }
-  .arrangement-details-container {
-    background-color: #272737;
-  }
-}
