@@ -886,6 +886,26 @@ input[type="date"] + label {
 
 /* <---********************************************************************---> */
 /* <---********************************************************************---> */
+#QA-checkbox {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  bottom: 1px;
+  left: 480px;
+}
+#QA-label {
+  background-color: tomato;
+  position: absolute;
+  left: 580px;
+}
+#QA-date-picker {
+  position: relative;
+  display: none;
+  left: 500px;
+}
+
+/* <---********************************************************************---> */
+/* <---********************************************************************---> */
 /* Media queries */
 @media only screen and (max-width: 500px) {
   body {

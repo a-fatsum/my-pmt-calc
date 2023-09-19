@@ -1,30 +1,14 @@
 "use strict";
-//
-// check contract expiry date warning display
-//
-function warningToggle() {
-  const warning = document.getElementById("check-contract-expiry");
-  if (warning.style.display === "block") {
-    warning.style.display = "none";
-  } else {
-    warning.style.display = "block";
-  }
-}
-//
-// setInterval(warningToggle, 600);
-//
 
 // <---------^ EVENT_FUNCTION ^-------------->
 //  ------------------------------->
 const event_function = function () {
   // start with  values
-  //
-  // const warning = document.getElementById("check-contract-expiry");
   let overdue = document.getElementById("overdue-input").value; //overdue value
   const monthlyInstalment = document.querySelector(".monthly-instalment").value; //monthly instalment value
   const instalement_Due_Day = document.querySelector(".select").value; //billing due day
-  const frequency = document.querySelector(".frequency-input").checked; //frequency
-  const annualised = document.getElementById("toggle_checkBox").checked; //min|pref pref = true -- min = false
+  const frequency = document.querySelector(".frequency-input").checked; //frequency --->> fortnightly = true -- weekly = false
+  const annualised = document.getElementById("toggle_checkBox").checked; //min|pref --->> pref = true -- min = false
   let paymentStartDate = document.querySelector(".date-picker").value; //Start Date
   const proposedArrangement = document.getElementById(
     "proposedArrangement"
@@ -36,10 +20,9 @@ const event_function = function () {
   ////// late_fees
   const late_fees = 25;
   //
-
-  //
   //
   new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
+
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
   // ???? overdue
   try {
@@ -47,7 +30,7 @@ const event_function = function () {
   } catch (error) {
     //
   }
-  // ???? monthylInstalment
+  // ???? monthlyInstalment
   try {
     if (!monthlyInstalment) throw (monthlyInstalment = 0);
   } catch (error) {
@@ -59,85 +42,107 @@ const event_function = function () {
   } catch (error) {
     //
   }
-
+  // ???? paymentStartDate
   //
   try {
     if (!paymentStartDate) throw (paymentStartDate = new Date());
   } catch (error) {
     //
   }
+  ////////////////////////////////////////////////////////////////////////////////////////
 
-  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
-  const regularPayment = document.querySelector(".regular-payment-amount");
-  let regular_amount = 0;
-  let freq = 0;
-  // fortnightly && min
-  if (frequency && !annualised) {
-    //
-    freq = 14;
-    regular_amount = monthlyInstalment / 2.165;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "fortnightly";
-    weeklyFortnightlyTag.classList.remove("weekly");
-    weeklyFortnightlyTag.classList.add("fortnightly");
-    //
-    document.querySelector(".min-pref-label").innerHTML = "Minimum";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-    // fortnightly && pref
-  } else if (frequency && annualised) {
-    //
-    freq = 14;
-    regular_amount = monthlyInstalment / 2;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "fortnightly";
-    weeklyFortnightlyTag.classList.remove("weekly");
-    weeklyFortnightlyTag.classList.add("fortnightly");
-    //
-    document.querySelector(".min-pref-label").innerHTML = "Preferred";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-  }
-  // weekly && min
-  else if (!frequency && !annualised) {
-    //
-    freq = 7;
-    regular_amount = monthlyInstalment / 4.33;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
+  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_CalculateRegularPayment-_-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
+
+  const CalculateRegularPayment = function (
+    frequency,
+    annualised,
+    monthlyInstalment
+  ) {
+    let regular_amount = 0; // Define regular amount variable
+    let freq = 0; // Define frequesncy variable
+
+    // fortnightly && min
+    if (frequency && !annualised) {
+      //
+      freq = 14;
+      regular_amount = monthlyInstalment / 2.165;
+      // fortnightly && pref
+    } else if (frequency && annualised) {
+      //
+      freq = 14;
+      regular_amount = monthlyInstalment / 2;
+    }
+    // weekly && min
+    else if (!frequency && !annualised) {
+      //
+      freq = 7;
+      regular_amount = monthlyInstalment / 4.33;
+    }
+    // Weekly && Pref
+    else if (!frequency && annualised) {
+      //
+      freq = 7;
+      regular_amount = monthlyInstalment / 4;
+    }
+    return [regular_amount, freq];
+  };
+  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
+
+  const [regular_amount, freq] = CalculateRegularPayment(
+    frequency,
+    annualised,
+    monthlyInstalment
+  );
+  //
+  const regularPayment = document.querySelector(".regular-payment-amount"); // DOM Regular Payment
+  regularPayment.innerHTML = regular_amount.toFixed(2); // Display the regular payment amount - user feedback
+  //
+  if (freq == 7) {
     weeklyFortnightlyTag.textContent = "weekly";
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
-    //
+  } else if (freq == 14) {
+    weeklyFortnightlyTag.textContent = "fortnightly";
+    weeklyFortnightlyTag.classList.remove("weekly");
+    weeklyFortnightlyTag.classList.add("fortnightly");
+  }
+  //
+  if (!annualised) {
     document.querySelector(".min-pref-label").innerHTML = "Minimum";
     document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-  }
-  // Weekly && Pref
-  else if (!frequency && annualised) {
-    //
-    freq = 7;
-    regular_amount = monthlyInstalment / 4;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "weekly";
-    weeklyFortnightlyTag.classList.remove("fortnightly");
-    weeklyFortnightlyTag.classList.add("weekly");
-    //
+  } else {
     document.querySelector(".min-pref-label").innerHTML = "Preferred";
     document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
   }
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
   //
   //  ///------------------***********--------------///
   // Loop through DatesList and increment by 7 or 14 days
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
   const regularPaymentDates = function (interval, paymentStartDate) {
+    // interval is the frequency 7 || 14
     const paymentDates = [];
     // ------- //
-    // Range of dates in array dates[]
+    // Function that finds the range of dates and place it in array ->  dates[]... Should return 365 dates..
+    // We need to find the range of dates between PaymentStartDate and same start date for next year.
     const getDatesInRange = function (startDate, endDate) {
       const date = new Date(startDate);
       const dates = [];
@@ -148,17 +153,19 @@ const event_function = function () {
       return dates;
     };
     //
-    // Date next year
+    // Function that returns the paymentStartDate date next year.
     const getDateNextYear = function (dt) {
       let nextYear = new Date(dt);
       nextYear.setDate(nextYear.getDate() + 365);
       return nextYear;
     };
     // ------- //
+    // create a list of dates using getDatesInRange function
     const oneYearDatesList = getDatesInRange(
       paymentStartDate,
       getDateNextYear(paymentStartDate)
     );
+    //
     //
     for (let i = 0; i <= oneYearDatesList.length; i += interval) {
       paymentDates.push(new Date(oneYearDatesList[i].setHours(0, 0, 0, 0)));
@@ -167,13 +174,70 @@ const event_function = function () {
   };
   const regular_dates = regularPaymentDates(freq, paymentStartDate);
 
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  // Set today's date ---> for Quality Assurance to change today's date
+  const setTodayDate = function () {
+    const QACheckBox = document.getElementById("QA-checkbox").checked;
+    const QADatePicker = document.getElementById("QA-date-picker");
+    let todayDate = new Date(QADatePicker.value);
+    //
+    if (QACheckBox) {
+      QADatePicker.style.display = "block";
+      return new Date(todayDate.setHours(0, 0, 0, 0));
+    }
+    //
+    else {
+      QADatePicker.style.display = "none";
+      todayDate = new Date();
+      return new Date(todayDate.setHours(0, 0, 0, 0));
+    }
+  };
+  console.log(setTodayDate());
+  const dateOfToday = setTodayDate();
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
   // Convert due day to due full date
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
-  const instalementDueFullDate = function (instalementDueDay) {
-    const today = new Date(); // ->   "2023-01-31"
-    let dueFullDate = new Date(); // ->   "2023-01-31"    // change to const
+  const instalementDueFullDate = function (instalementDueDay, dateOfToday) {
+    // const today = new Date(); // ->   "2023-01-31" // "2023-09-01"
+    // let dueFullDate = new Date(); // ->   "2023-01-31"    // // "2023-09-01"
+
+    const today = new Date(dateOfToday); // ->   "2023-01-31" // "2023-09-01"
+    let dueFullDate = new Date(dateOfToday); // ->   "2023-01-31"    // // "2023-09-01"
+
     dueFullDate.setDate(Number(instalementDueDay));
     //
+    // accounting for February and Leap years...
+    // If we're in January
     if (
       Number(instalementDueDay) > 28 &&
       Number(today.getMonth()) == 0 &&
@@ -181,7 +245,7 @@ const event_function = function () {
     ) {
       dueFullDate = new Date(today.getFullYear(), 2, 0);
     }
-    //
+    // If we're in February
     else if (
       Number(instalementDueDay) > 28 &&
       Number(today.getMonth()) == 1 &&
@@ -205,12 +269,30 @@ const event_function = function () {
     return dueFullDate;
   };
 
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
   // Due_Dates_List
+  // Function that generates a list of 12 due dates for the whole year
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
   const Due_Dates_List = function (dueDate) {
     const Dates_List = [];
     // if LESS than or == 28
     if (instalement_Due_Day <= 28) {
+      // add the first due date into the array first
       Dates_List.push(dueDate);
       for (let i = 0; i < 11; i++) {
         dueDate = new Date(
@@ -225,6 +307,7 @@ const event_function = function () {
     //
     // if GREATER than or == 28
     else if (instalement_Due_Day >= 28) {
+      // add the first due date into the array first
       Dates_List.push(dueDate);
       for (let i = 0; i < 11; i++) {
         dueDate = new Date(
@@ -262,7 +345,25 @@ const event_function = function () {
     }
     return Dates_List;
   };
-  const due_dates = Due_Dates_List(instalementDueFullDate(instalement_Due_Day));
+  const due_dates = Due_Dates_List(
+    instalementDueFullDate(instalement_Due_Day, dateOfToday)
+  );
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
 
   // Calculate balances
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
@@ -297,6 +398,22 @@ const event_function = function () {
   };
 
   const balances_list = cal_balances(due_dates, regular_dates);
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
 
   // cal_net_balances function          ****************************
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
@@ -364,6 +481,22 @@ const event_function = function () {
   };
   //
 
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
+  //
+
   const [net_balances, numOfRegPmts] = cal_net_balances(
     overdue,
     regular_dates,
@@ -373,6 +506,8 @@ const event_function = function () {
     regular_amount,
     late_fees
   );
+
+  //
 
   //    ----------------------------- ***** -------------------------- //
 
@@ -408,7 +543,7 @@ const event_function = function () {
     const paymentsResume = regularDatesList[indexOfBalance + 1];
 
     // Number of days
-    const today_date = new Date(); /////////////////////
+    const today_date = new Date(dateOfToday); /////////////////////
     //
     //
     let number_of_days =
@@ -495,11 +630,13 @@ const event_function = function () {
   //
   //
 };
+
+//
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
-// =--------_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_------= //
+// =-----_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_----= //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
@@ -557,3 +694,11 @@ document.getElementById("clear_button").addEventListener("click", () => {
 });
 
 /////////----------------------------------------///////////////
+// QA date
+document
+  .getElementById("QA-checkbox")
+  .addEventListener("change", event_function);
+//
+document
+  .getElementById("QA-date-picker")
+  .addEventListener("input", event_function);
