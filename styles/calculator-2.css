@@ -1,0 +1,86 @@
+/* This sheet includes styles for the monthly calculations */
+
+.tab {
+  position: relative;
+  top: 40px;
+  margin: auto;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.tab button {
+  background-color: #404056;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 140px;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-container);
+  opacity: 0.5;
+}
+.monthly-arrangement-details {
+  display: none;
+}
+.num-of-months {
+  width: 10.5em;
+  height: 3em;
+  font-size: var(--input-font-size);
+  color: var(--color-blue);
+  border: none;
+  outline: none;
+  margin-left: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.monthly-arrangement-details label {
+  display: inline-block;
+  margin-left: 30px;
+  color: #ffffff;
+}
+
+.monthly-date-picker {
+  position: relative;
+  width: 10.5em;
+  height: 3em;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-left: 2px;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-button);
+  border: none;
+  outline: none;
+  font-size: var(--input-font-size);
+  font-family: Roboto, Arial;
+  color: var(--color-blue);
+  cursor: pointer;
+  text-align: center;
+}
+
+.month {
+  margin: 10px;
+}
+
+/*  */
+
+/*  */
+
+/*  */
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+/* .payment-details,
+.arrangement-details,
+.arrangement-outer-legend,
+.QA-container {
+  display: none;
+} */

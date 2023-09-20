@@ -19,9 +19,14 @@
   </header>
 
   <body>
-    <!-- Account Details -->
-
+    <!--  -->
+    <div class="tab">
+      <button class="fortnightly-weekly-tab">Fortnightly / Weekly</button>
+      <button class="monthly-tab">Monthly</button>
+    </div>
+    <!-- Form -->
     <form id="form">
+      <!-- Account Details -->
       <fieldset class="account-details">
         <legend class="outer-legend">Account details</legend>
         <fieldset class="arrears-details">
@@ -135,12 +140,37 @@
           <tag class="regular-payment">Regular payment</tag>
           <tag class="weekly-fortnightly-tag"></tag>
         </fieldset>
+        <!--  -->
+        <!--  Monthly payment details ------------------------------------->
+        <!--  -->
+        <fieldset class="monthly-arrangement-details">
+          <legend class="inner-legend">Monthly arrangement details</legend>
+
+          <input class="num-of-months" type="text" />
+          <label> Number of months</label>
+          <!--  -->
+          <input class="monthly-date-picker" type="date" />
+          <label> Payment start date</label>
+          <!--  -->
+          <input class="num-of-months month" type="text" />
+          <label> Month # 1</label>
+          <!--  -->
+          <input class="num-of-months month" type="text" />
+          <label> Month # 2</label>
+          <!--  -->
+          <input class="num-of-months month" type="text" />
+          <label> Month # 3</label>
+          <!--  -->
+        </fieldset>
+        <!--  -->
       </fieldset>
 
       <!-- ///////////////////////////////////////// -->
       <!-- Payment Arrangement Details -->
       <fieldset class="arrangement-details-container">
-        <legend class="outer-legend">Payment arrangement details</legend>
+        <legend class="outer-legend arrangement-outer-legend">
+          Payment arrangement details
+        </legend>
         <div class="arrangement-details">
           <!-- <div class="proposed-payment-container"> 
 </div> -->
@@ -208,12 +238,17 @@
         </div>
       </fieldset>
       <!-- Q A Date picker -->
-      <input id="QA-checkbox" type="checkbox" />
-      <label id="QA-label"> CHANGE TODAY'S DATE - <span> QA ONLY </span></label>
-      <input id="QA-date-picker" type="date" />
+      <div class="QA-container">
+        <input id="QA-checkbox" type="checkbox" />
+        <label id="QA-label">
+          CHANGE TODAY'S DATE - <span> QA ONLY </span></label
+        >
+        <input id="QA-date-picker" type="date" />
+      </div>
     </form>
 
     <script src="script.js"></script>
+    <script src="script-2.js"></script>
     <!-- <script src="app.js"></script> -->
   </body>
 </html>

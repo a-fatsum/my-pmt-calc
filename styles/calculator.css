@@ -1,7 +1,6 @@
-/*<-- project specs -->
+@import "calculator-2.css";
 
-
-*/
+/*<-- project specs -->*/
 
 :root {
   /* --text-color-inside-button: #595f6e; */
@@ -50,7 +49,7 @@ body {
 /* FORM */
 #form {
   position: relative;
-  /* top: 55px; */
+  top: 55px;
   width: 400px;
   margin: auto;
   height: 100%;
@@ -86,11 +85,13 @@ body {
 /* Arrears - Current payment details - Payment arrangement details */
 .arrears-details,
 .payment-details,
-.arrangement-details {
+.arrangement-details,
+.monthly-arrangement-details {
   /* margin: 15px; */
   box-shadow: var(--box-shadow-container);
   position: relative;
-  height: 230px;
+  /* height: 230px; */
+  height: auto;
   padding: 20px;
   padding-top: 10px;
   border: none;
