@@ -23,7 +23,7 @@
   opacity: 0.5;
 }
 .monthly-arrangement-details {
-  display: none;
+  /* display: none; */
 }
 .num-of-months {
   width: 10.5em;

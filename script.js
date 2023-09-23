@@ -207,7 +207,7 @@ const event_function = function () {
       return new Date(todayDate.setHours(0, 0, 0, 0));
     }
   };
-  console.log(setTodayDate());
+  // console.log(setTodayDate());
   const dateOfToday = setTodayDate();
 
   //
