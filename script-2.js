@@ -35,7 +35,7 @@
 // ============================================ //
 const overdue = document.getElementById("overdue-input").value;
 const monthlyInstalment = document.querySelector(".monthly-instalment").value;
-const paymentStartDate = document.querySelector(".date-picker").value;
+const paymentStartDate = document.querySelector(".monthly-date-picker").value;
 const todayDate = new Date(new Date().setHours(0, 0, 0, 0));
 const billingDay = document.querySelector(".select").value;
 const lateFees = 25;
@@ -88,17 +88,21 @@ const instalementDueFullDate = function (instalementDueDay) {
 
 // ==============>>>>>>>
 const calculateMonthly = function () {
-  let newMonthly =
-    Number(monthlyInstalment) / Number(numOfMonths) +
-    25 +
-    Number(monthlyInstalment);
+  let monthlyDates = instalementDueFullDate(billingDay);
+  const month = monthlyDates.getMonth();
+  const list_of_dates_in_arrg = [];
   for (let i = 0; i < numOfMonths; i++) {
-    const newMonth = new Date(instalementDueFullDate(billingDay)).getMonth + i;
-    const due_dates = new Date(instalementDueFullDate(billingDay)).setMonth(
-      newMonth
-    );
-    return due_dates;
+    monthlyDates = new Date(monthlyDates.setMonth(month + i));
+    list_of_dates_in_arrg.push(monthlyDates);
   }
+  return list_of_dates_in_arrg;
 };
 //
 console.log(calculateMonthly());
+
+// let monthlyDates = instalementDueFullDate(billingDay);
+// const month = monthlyDates.getMonth();
+// for (let i = 0; i < numOfMonths; i++) {
+//   monthlyDates = new Date(monthlyDates.setMonth(month + i));
+//   console.log(monthlyDates);
+// }
