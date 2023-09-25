@@ -24,6 +24,8 @@
 }
 .monthly-arrangement-details {
   /* display: none; */
+  background-color: tomato;
+  height: 900px;
 }
 .num-of-months {
   width: 10.5em;

@@ -87,22 +87,58 @@ const instalementDueFullDate = function (instalementDueDay) {
 };
 
 // ==============>>>>>>>
+// ==============>>>>>>>
+// ==============>>>>>>>
+
+// ==============>>>>>>>
+// ==============>>>>>>>
+
 const calculateMonthly = function () {
-  let monthlyDates = instalementDueFullDate(billingDay);
-  const month = monthlyDates.getMonth();
-  const list_of_dates_in_arrg = [];
-  for (let i = 0; i < numOfMonths; i++) {
-    monthlyDates = new Date(monthlyDates.setMonth(month + i));
-    list_of_dates_in_arrg.push(monthlyDates);
-  }
-  return list_of_dates_in_arrg;
+  const late_fees_total = Number(numOfMonths) * Number(lateFees);
+  const total_arrangement_amount = Number(overdue) + late_fees_total;
+  const amount_per_month =
+    Number(total_arrangement_amount) / Number(numOfMonths) +
+    Number(monthlyInstalment);
+  return amount_per_month;
 };
-//
+
+const total_monthly_arrangement =
+  Number(calculateMonthly()) * Number(numOfMonths);
+
+document.querySelector(".amount-per-month").innerHTML = calculateMonthly();
+document.querySelector(".total-monthly-arrangement").innerHTML =
+  total_monthly_arrangement;
 console.log(calculateMonthly());
 
-// let monthlyDates = instalementDueFullDate(billingDay);
-// const month = monthlyDates.getMonth();
-// for (let i = 0; i < numOfMonths; i++) {
-//   monthlyDates = new Date(monthlyDates.setMonth(month + i));
-//   console.log(monthlyDates);
-// }
+// ==============>>>>>>>
+// const calculateMonthly = function () {
+//   let monthlyDates = instalementDueFullDate(billingDay);
+//   const month = monthlyDates.getMonth();
+//   const list_of_dates_in_arrg = [];
+//   for (let i = 0; i < numOfMonths; i++) {
+//     monthlyDates = new Date(monthlyDates.setMonth(month + i));
+//     list_of_dates_in_arrg.push(monthlyDates);
+//   }
+//   return list_of_dates_in_arrg;
+// };
+// //
+// console.log(calculateMonthly());
+// ===================>>>>>>>>>>>>>>>
+
+// ===================>>>>>>>>>>>>>>>
+const list_of_dates_in_arrg = [];
+list_of_dates_in_arrg.push(instalementDueFullDate(billingDay));
+let monthlyDates = instalementDueFullDate(billingDay);
+const month = monthlyDates.getMonth();
+for (let i = 0; i < numOfMonths; i++) {
+  monthlyDates = new Date(monthlyDates.setMonth(month + i));
+  console.log(monthlyDates);
+  list_of_dates_in_arrg.push(monthlyDates);
+}
+console.log(list_of_dates_in_arrg);
+let x = document.getElementsByClassName("month");
+for (let i = 0, len = x.length; i <= len; i++) {
+  x[i].innerHTML = list_of_dates_in_arrg[i].toDateString();
+}
+
+// =================================
