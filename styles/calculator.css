@@ -33,13 +33,17 @@ body {
 }
 
 .outer-legend {
+  position: relative;
+  bottom: 15px;
   font-size: x-large;
-  font-weight: 600;
   border-radius: 5px;
   color: var(--legend-text-color);
 }
 
 .inner-legend {
+  /* background-color: tomato; */
+  position: relative;
+  bottom: 15px;
   font-weight: 400;
   font-size: larger;
   color: var(--legend-text-color);
@@ -71,7 +75,7 @@ body {
 .account-details,
 .arrangement-details-container {
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
   outline: none;
   border: none;
   width: 400px;
@@ -87,7 +91,6 @@ body {
 .payment-details,
 .arrangement-details,
 .monthly-arrangement-details {
-  /* margin: 15px; */
   box-shadow: var(--box-shadow-container);
   position: relative;
   /* height: 230px; */
@@ -97,12 +100,6 @@ body {
   border: none;
   border-radius: 5px;
   background-color: #404056;
-
-  /* background-image: linear-gradient(
-    270deg,
-    hsla(263, 58%, 47%, 0.916) 0%,
-    hsla(226, 36%, 49%, 0) 100%
-  ); */
 }
 
 .arrears-details {
@@ -114,6 +111,7 @@ body {
 
 .payment-details {
   height: 230px;
+  margin-top: 25px;
 }
 
 /****************************/
@@ -251,7 +249,7 @@ body {
   transition: 0.4s;
   color: var(--color-blue);
   border: none;
-  margin-left: 15px;
+  margin-left: 55px;
   box-shadow: var(--box-shadow-button);
   text-align: center;
   cursor: pointer;
@@ -264,7 +262,7 @@ body {
 }
 
 /* .select-wrapper::after { */
-.select-wrapper::after {
+.select-wrapper::before {
   content: "Billing day";
   margin-left: 50px;
   color: #fdfeff;
@@ -946,3 +944,10 @@ input[type="date"] + label {
     height: auto;
   }
 }
+
+/*  */
+
+/* .arrangement-details-container {
+  background-color: tomato;
+  display: none;
+} */

@@ -2,53 +2,67 @@
 //
 
 //
+const monthlyButton = document.querySelector(".monthly-button");
 
-// const fortnightlyWeeklyTab = document.querySelector(".fortnightly-weekly-tab");
-// const monthlyTab = document.querySelector(".monthly-tab");
+const fortnightlyWeeklyButton = document.querySelector(
+  ".fortnightly-weekly-button"
+);
 
-// fortnightlyWeeklyTab.addEventListener("click", () => {
-//   (document.querySelector(".monthly-arrangement-details").classList.replace =
-//     "show"),
-//     "hide";
-// });
-// fortnightlyWeeklyTab.addEventListener("click", () => {
-//   (document.querySelector(".monthly-arrangement-details").classList.replace =
-//     "show"),
-//     "hide";
-// });
-
-// //
-// monthlyTab.addEventListener("click", () => {});
-// monthlyTab.addEventListener("click", () => {
-//   document.querySelector(".monthly-arrangement-details").style.display =
-//     "block";
-//   document.querySelector(".payment-details").classList.replace("show", "hide");
-//   document
-//     .querySelector(".arrangement-details")
-//     .classList.replace("show", "hide");
-//   document
-//     .querySelector(".arrangement-outer-legend")
-//     .classList.replace("show", "hide");
-//   document.querySelector(".QA-container").classList.replace("show", "hide");
-// });
+// ----
+fortnightlyWeeklyButton.addEventListener("click", () => {
+  // hide monthly arrangement container
+  document.querySelector(".monthly-arrangement-details").style.display = "none";
+  // show payment-details container
+  document.querySelector(".payment-details").classList.replace("hide", "show");
+  // show arrangement-deails-container
+  document
+    .querySelector(".arrangement-details-container")
+    .classList.replace("hide", "show");
+  // change opacity of the monthly button
+  monthlyButton.style.opacity = "0.2";
+  fortnightlyWeeklyButton.style.opacity = "1";
+});
+// ---
+monthlyButton.addEventListener("click", () => {
+  document.querySelector(".monthly-arrangement-details").style.display =
+    "block";
+  //
+  document.querySelector(".payment-details").classList.replace("show", "hide");
+  //
+  document
+    .querySelector(".arrangement-details-container")
+    .classList.replace("show", "hide");
+  //
+  monthlyButton.style.opacity = "1";
+  fortnightlyWeeklyButton.style.opacity = "0.2";
+});
 
 // ============================================ //
-
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+// ============================================ //
+//
 const main_function = function () {
   const overdue = document.getElementById("overdue-input").value;
   const monthlyInstalment = document.querySelector(".monthly-instalment").value;
-  const paymentStartDate = document.querySelector(".monthly-date-picker").value;
+  // const paymentStartDate = document.querySelector(".monthly-date-picker").value;
   const todayDate = new Date(new Date().setHours(0, 0, 0, 0));
   const billingDay = document.querySelector(".select").value;
   const lateFees = 25;
   const numOfMonths = document.querySelector(".num-of-months").value;
-
   console.log(numOfMonths);
   console.log(billingDay);
   console.log(todayDate);
   console.log(overdue);
   console.log(monthlyInstalment);
-  console.log(paymentStartDate);
+  // console.log(paymentStartDate);
 
   const instalementDueFullDate = function (instalementDueDay) {
     // const today = new Date(); // ->   "2023-01-31" // "2023-09-01"
@@ -107,10 +121,12 @@ const main_function = function () {
   const total_monthly_arrangement =
     Number(calculateMonthly()) * Number(numOfMonths);
 
-  document.querySelector(".amount-per-month").innerHTML = calculateMonthly();
-  document.querySelector(".total-monthly-arrangement").innerHTML =
-    total_monthly_arrangement;
-  console.log(calculateMonthly());
+  document.querySelector(".amount-per-month-label").textContent = Number(
+    calculateMonthly()
+  ).toFixed(2);
+  document.querySelector(".total-monthly-label").textContent = Number(
+    total_monthly_arrangement
+  ).toFixed(2);
 
   // ==============>>>>>>>
   // const calculateMonthly = function () {
@@ -132,9 +148,9 @@ const main_function = function () {
 
   //
 
-  month_input_1.value = calculateMonthly();
-  month_input_2.value = calculateMonthly();
-  month_input_3.value = calculateMonthly();
+  month_input_1.value = calculateMonthly().toFixed(2);
+  month_input_2.value = calculateMonthly().toFixed(2);
+  month_input_3.value = calculateMonthly().toFixed(2);
 
   month_input_1.addEventListener("keyup", () => {
     const remaining_balance =
@@ -179,7 +195,7 @@ const main_function = function () {
 
 const overdue = document.getElementById("overdue-input");
 const monthlyInstalment = document.querySelector(".monthly-instalment");
-const paymentStartDate = document.querySelector(".monthly-date-picker");
+// const paymentStartDate = document.querySelector(".monthly-date-picker");
 const todayDate = new Date(new Date().setHours(0, 0, 0, 0));
 const billingDay = document.querySelector(".select");
 const lateFees = 25;

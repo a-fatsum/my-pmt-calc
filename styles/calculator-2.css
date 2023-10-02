@@ -1,8 +1,8 @@
 /* This sheet includes styles for the monthly calculations */
 
-.tab {
+.tabs {
   position: relative;
-  top: 40px;
+  bottom: 10px;
   margin: auto;
   left: 10px;
   display: flex;
@@ -11,7 +11,7 @@
   width: 300px;
 }
 
-.tab button {
+.tabs button {
   background-color: #404056;
   outline: none;
   border: none;
@@ -20,14 +20,19 @@
   width: 140px;
   border-radius: 5px;
   box-shadow: var(--box-shadow-container);
-  opacity: 0.5;
+  color: var(--legend-text-color);
 }
+
 .monthly-arrangement-details {
-  /* display: none; */
-  background-color: tomato;
+  display: none;
   height: 900px;
+  top: 25px;
+  margin-bottom: 50px;
 }
-.num-of-months {
+.num-of-months,
+.month-input-1,
+.month-input-2,
+.month-input-3 {
   width: 10.5em;
   height: 3em;
   font-size: var(--input-font-size);
@@ -64,8 +69,37 @@
   text-align: center;
 }
 
+.amount-per-month,
+.total-monthly-arrangement {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding-right: 30px;
+  margin-top: 30px;
+}
+
+.amount-per-month-label {
+  /* background-color: tomato; */
+}
+.total-monthly-arrangement {
+}
+.total-monthly-label {
+  /* background-color: tomato; */
+}
+/*  */
+.month-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+/*  */
 .month {
   margin: 10px;
+  margin-left: 30px;
+  color: var(--legend-text-color);
 }
 
 /*  */

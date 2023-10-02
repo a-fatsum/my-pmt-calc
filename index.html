@@ -19,11 +19,6 @@
   </header>
 
   <body>
-    <!--  -->
-    <div class="tab">
-      <button class="fortnightly-weekly-tab">Fortnightly / Weekly</button>
-      <button class="monthly-tab">Monthly</button>
-    </div>
     <!-- Form -->
     <form id="form">
       <!-- Account Details -->
@@ -68,7 +63,7 @@
 
           <!-- DROP-DOWN -->
           <!-- <div class="dropdown"> -->
-          <div class="wrapper">
+          <div class="select-wrapper">
             <select id="dropdown-list" class="select">
               <!-- <div class="dropdown-content"> -->
               <option disabled selected>Billing due day</option>
@@ -110,7 +105,15 @@
           <!-- </div> -->
         </fieldset>
 
-        <fieldset class="payment-details">
+        <!-- Monthly // Fortnightly - Weekly buttons  -->
+        <div class="tabs">
+          <button class="fortnightly-weekly-button">
+            Fortnightly / Weekly
+          </button>
+          <button class="monthly-button">Monthly</button>
+        </div>
+
+        <fieldset class="payment-details show">
           <legend class="inner-legend">Current payment details</legend>
 
           <!-- FREQUENCY TOGGLE -->
@@ -146,42 +149,58 @@
         <fieldset class="monthly-arrangement-details">
           <legend class="inner-legend">Monthly arrangement details</legend>
 
-          <input class="num-of-months" type="text" />
           <label> Number of months</label>
+          <input class="num-of-months" type="text" />
           <!--  -->
-          <input class="monthly-date-picker" type="date" />
-          <label> Payment start date</label>
+          <!-- <label> Payment start date</label>
+          <input class="monthly-date-picker" type="date" /> -->
           <!--  -->
-          <div class="amount-per-month"></div>
-          <label> Amount per month</label>
-          <!--  -->
-          <div class="total-monthly-arrangement"></div>
-          <label> Total monthly arrangement amount</label>
 
           <!--  -->
-          <div class="month"></div>
-          <label class="label"> Month # 1</label>
-          <input class="month-input-1" type="text" />
+          <div class="month">-</div>
+          <div class="month-wrapper">
+            <label class="label"> Month # 1</label>
+            <input class="month-input-1" type="text" />
+          </div>
           <!--  -->
-          <div class="month"></div>
-          <label class="label"> Month # 2</label>
-          <input class="month-input-2" type="text" />
+          <div class="month">-</div>
+          <div class="month-wrapper">
+            <label class="label"> Month # 2</label>
+            <input class="month-input-2" type="text" />
+          </div>
           <!--  -->
-          <div class="month"></div>
-          <label class="label"> Month # 3</label>
-          <input class="month-input-3" type="text" />
+          <div class="month">-</div>
+          <div class="month-wrapper">
+            <label class="label"> Month # 3</label>
+            <input class="month-input-3" type="text" />
+          </div>
           <!--  -->
+
+          <div class="amount-per-month">
+            <label class="amount-per-month-label"></label>
+            <label> Amount per month</label>
+          </div>
+          <!--  -->
+          <div class="total-monthly-arrangement">
+            <label class="total-monthly-label"></label>
+            <label> Total monthly arrangement</label>
+          </div>
+
+          <!-- Clear button -->
+          <div id="clear_button">
+            <button type="reset">CLEAR</button>
+          </div>
         </fieldset>
         <!--  -->
       </fieldset>
 
       <!-- ///////////////////////////////////////// -->
       <!-- Payment Arrangement Details -->
-      <fieldset class="arrangement-details-container">
+      <fieldset class="arrangement-details-container show">
         <legend class="outer-legend arrangement-outer-legend">
           Payment arrangement details
         </legend>
-        <div class="arrangement-details">
+        <div class="arrangement-details show">
           <!-- <div class="proposed-payment-container"> 
 </div> -->
 
@@ -246,15 +265,15 @@
           </div>
           <!--  -->
         </div>
+        <!-- Q A Date picker -->
+        <div class="QA-container">
+          <input id="QA-checkbox" type="checkbox" />
+          <label id="QA-label">
+            CHANGE TODAY'S DATE - <span> QA ONLY </span></label
+          >
+          <input id="QA-date-picker" type="date" />
+        </div>
       </fieldset>
-      <!-- Q A Date picker -->
-      <div class="QA-container">
-        <input id="QA-checkbox" type="checkbox" />
-        <label id="QA-label">
-          CHANGE TODAY'S DATE - <span> QA ONLY </span></label
-        >
-        <input id="QA-date-picker" type="date" />
-      </div>
     </form>
 
     <script src="script.js"></script>

@@ -658,11 +658,6 @@ document
 //
 // "Billing day" tag value
 
-document.querySelector(".wrapper").addEventListener("click", function () {
-  if (document.getElementById("dropdown-list").value !== "Billing due day") {
-    document.querySelector(".wrapper").classList.add("select-wrapper");
-  }
-});
 document.querySelector(".select").addEventListener("click", event_function);
 //
 document
