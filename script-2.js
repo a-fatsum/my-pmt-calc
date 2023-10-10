@@ -211,8 +211,16 @@ const main_function = function () {
   //
   // ===================>>>>>>>>>>>>>>>
   // ===================>>>>>>>>>>>>>>>
-  // ===================>>>>>>>>>>>>>>>
 
+  // ===================>>>>>>>>>>>>>>> Add monthly amounts to monthly inputs
+  const list_of_elements_months_inputs =
+    document.getElementsByClassName("months");
+  for (let i = 0; i < list_of_elements_months_inputs.length; i++) {
+    list_of_elements_months_inputs[i].value = calculateMonthly().toFixed(2);
+  }
+  // =================================
+
+  // ===================>>>>>>>>>>>>>>>
   // ===================>>>>>>>>>>>>>>> Add dates into dates fields
   const list_of_dates_in_arrg = [];
   list_of_dates_in_arrg.push(instalementDueFullDate(billingDay));
@@ -231,10 +239,10 @@ const main_function = function () {
   }
   // ===================>>>>>>>>>>>>>>>
   //
-
-  // ===================>>>>>>>>>>>>>>> Add monthly amounts to monthly inputs
 };
+// =================================
 
+// =================================
 // =================================
 
 const overdue = document.getElementById("overdue-input");
@@ -249,4 +257,5 @@ const numOfMonths = document.querySelector(".num-of-months");
 overdue.addEventListener("input", main_function);
 monthlyInstalment.addEventListener("input", main_function);
 billingDay.addEventListener("click", main_function);
+
 numOfMonths.addEventListener("input", main_function);
