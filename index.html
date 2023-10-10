@@ -107,10 +107,10 @@
 
         <!-- Monthly // Fortnightly - Weekly buttons  -->
         <div class="tabs">
-          <button class="fortnightly-weekly-button">
+          <button type="button" class="fortnightly-weekly-button">
             Fortnightly / Weekly
           </button>
-          <button class="monthly-button">Monthly</button>
+          <button type="button" class="monthly-button">Monthly</button>
         </div>
 
         <fieldset class="payment-details show">
@@ -145,51 +145,48 @@
         </fieldset>
         <!--  -->
         <!--  Monthly payment details ------------------------------------->
-        <!--  -->
-        <fieldset class="monthly-arrangement-details">
-          <legend class="inner-legend">Monthly arrangement details</legend>
+        <!--  Monthly payment details ------------------------------------->
+        <!--  Monthly payment details ------------------------------------->
+        <!--  Monthly payment details ------------------------------------->
 
-          <label> Number of months</label>
-          <input class="num-of-months" type="text" />
+        <!--  -->
+        <fieldset class="monthly-arrangement-details" id="month-wrapper">
+          <legend class="inner-legend">Monthly arrangement details</legend>
+          <div>
+            <label> Number of months</label>
+            <input class="num-of-months" type="text" />
+          </div>
           <!--  -->
           <!-- <label> Payment start date</label>
           <input class="monthly-date-picker" type="date" /> -->
           <!--  -->
 
           <!--  -->
-          <div class="month">-</div>
-          <div class="month-wrapper">
-            <label class="label"> Month # 1</label>
-            <input class="month-input-1" type="text" />
+          <div id="months-dates-and-input-wrapper">
+            <div id="months-dates-containter"></div>
+            <!-- ------------------------- -->
+            <!-- ------------------------- -->
+            <div id="months-input-container"></div>
           </div>
-          <!--  -->
-          <div class="month">-</div>
-          <div class="month-wrapper">
-            <label class="label"> Month # 2</label>
-            <input class="month-input-2" type="text" />
-          </div>
-          <!--  -->
-          <div class="month">-</div>
-          <div class="month-wrapper">
-            <label class="label"> Month # 3</label>
-            <input class="month-input-3" type="text" />
-          </div>
-          <!--  -->
 
-          <div class="amount-per-month">
-            <label class="amount-per-month-label"></label>
-            <label> Amount per month</label>
-          </div>
-          <!--  -->
-          <div class="total-monthly-arrangement">
-            <label class="total-monthly-label"></label>
-            <label> Total monthly arrangement</label>
+          <!-- ------------------------- -->
+          <!-- ------------------------- -->
+          <div>
+            <div class="amount-per-month">
+              <label class="amount-per-month-label"></label>
+              <label> Amount per month</label>
+            </div>
+            <!--  -->
+            <div class="total-monthly-arrangement">
+              <label class="total-monthly-label"></label>
+              <label> Total monthly arrangement</label>
+            </div>
           </div>
 
           <!-- Clear button -->
-          <div id="clear_button">
+          <!-- <div id="clear_button">
             <button type="reset">CLEAR</button>
-          </div>
+          </div> -->
         </fieldset>
         <!--  -->
       </fieldset>

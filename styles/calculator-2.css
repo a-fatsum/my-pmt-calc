@@ -25,14 +25,10 @@
 
 .monthly-arrangement-details {
   display: none;
-  height: 900px;
-  top: 25px;
-  margin-bottom: 50px;
+  margin: auto;
 }
-.num-of-months,
-.month-input-1,
-.month-input-2,
-.month-input-3 {
+
+.num-of-months {
   width: 10.5em;
   height: 3em;
   font-size: var(--input-font-size);
@@ -42,6 +38,22 @@
   margin-left: 15px;
   border-radius: 5px;
   text-align: center;
+
+  /* background-color: tomato; */
+}
+
+.months {
+  width: 10.5em;
+  height: 3em;
+  font-size: var(--input-font-size);
+  color: var(--color-blue);
+  border: none;
+  outline: none;
+  margin-left: 15px;
+  border-radius: 5px;
+  text-align: center;
+
+  /* background-color: olive; */
 }
 
 .monthly-arrangement-details label {
@@ -50,7 +62,7 @@
   color: #ffffff;
 }
 
-.monthly-date-picker {
+/* .monthly-date-picker {
   position: relative;
   width: 10.5em;
   height: 3em;
@@ -67,7 +79,7 @@
   color: var(--color-blue);
   cursor: pointer;
   text-align: center;
-}
+} */
 
 .amount-per-month,
 .total-monthly-arrangement {
@@ -89,12 +101,12 @@
   /* background-color: tomato; */
 }
 /*  */
-.month-wrapper {
+/* .month-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-right: 20px;
-}
+} */
 /*  */
 .month {
   margin: 10px;
@@ -102,8 +114,26 @@
   color: var(--legend-text-color);
 }
 
+#months-input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 20px;
+  gap: 20px;
+}
 /*  */
 
+#months-dates-and-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+#months-dates-containter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 /*  */
 
 /*  */
@@ -113,6 +143,18 @@
 
 .show {
   display: block;
+}
+
+.show-monthly {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  position: relative;
+  top: 25px;
+  margin-bottom: 50px;
+  align-items: center;
+  gap: 20px;
+  /* background-color: tomato; */
 }
 /* .payment-details,
 .arrangement-details,
