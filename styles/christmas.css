@@ -1,0 +1,63 @@
+/* body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background: #112055;
+} */
+svg {
+  height: 30vh;
+  width: 30vh;
+  overflow: visible;
+  position: relative;
+}
+/* path.top {
+  --star-color: #ff0;
+} */
+path {
+  /* --star-color: #379157; */
+  fill: var(--star-color, green);
+  stroke: var(--star-color, green);
+  fill: #0f0;
+  /* stroke: #0f0; */
+  stroke: #0f0;
+
+  stroke-width: 0.2;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+  animation: star 8s ease-in infinite;
+  animation-delay: calc((var(--no) - 165) * -0.015s);
+  transform-box: fill-box;
+}
+@keyframes star {
+  0% {
+    transform: scale(0);
+    animation-timing-function: cubic-bezier(0.74, 1.72, 0.57, 1.01);
+  }
+  10% {
+    transform: scale(1);
+  }
+  65% {
+    transform: translateY(0px) scale(1);
+  }
+  75% {
+    transform: translateY(50px) scale(0);
+  }
+  100% {
+    transform: translateY(0px) scale(0);
+  }
+}
+/*  */
+
+.xmas-effect-container {
+  text-align: center;
+  width: fit-content;
+  position: relative;
+  margin: auto;
+}
+.xmas-effect-container h2 {
+  color: red;
+  font-weight: lighter;
+}
