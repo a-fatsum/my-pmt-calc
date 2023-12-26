@@ -744,7 +744,7 @@ input[type="date"] + label {
   position: relative;
   position: absolute;
   display: inline-block;
-  margin-left: 45px;
+  margin-left: 40px;
   color: rgb(20, 25, 120);
   font-weight: 700;
   font-size: larger;
