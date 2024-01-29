@@ -1,7 +1,4 @@
-/*<-- project specs -->
-
-
-*/
+/* @import "calculator-2.css"; */
 
 :root {
   /* --text-color-inside-button: #595f6e; */
@@ -21,7 +18,7 @@
   --output-text-color: #ffffff;
   --input-font-size: 14px;
   --input-height: 25px;
-  --input-width: 150px;
+  --input-width: 20rem;
   --input-text-color: #2c2b2b;
   --tag-text-color: #ffffff;
   /* background-color: #34393d; */
@@ -34,13 +31,17 @@ body {
 }
 
 .outer-legend {
+  position: relative;
+  bottom: 15px;
   font-size: x-large;
-  font-weight: 600;
   border-radius: 5px;
   color: var(--legend-text-color);
 }
 
 .inner-legend {
+  /* background-color: tomato; */
+  position: relative;
+  bottom: 15px;
   font-weight: 400;
   font-size: larger;
   color: var(--legend-text-color);
@@ -50,7 +51,7 @@ body {
 /* FORM */
 #form {
   position: relative;
-  /* top: 55px; */
+  top: 55px;
   width: 400px;
   margin: auto;
   height: 100%;
@@ -72,7 +73,6 @@ body {
 .account-details,
 .arrangement-details-container {
   position: relative;
-  display: inline-block;
   outline: none;
   border: none;
   width: 400px;
@@ -86,22 +86,19 @@ body {
 /* Arrears - Current payment details - Payment arrangement details */
 .arrears-details,
 .payment-details,
-.arrangement-details {
-  /* margin: 15px; */
-  box-shadow: var(--box-shadow-container);
+.arrangement-details,
+.monthly-arrangement-details {
+  box-shadow: 0px 0px 24px -3px rgba(0, 0, 0, 0.336);
+  -webkit-box-shadow: 0px 0px 24px -3px rgba(0, 0, 0, 0.336);
+  -moz-box-shadow: 0px 0px 24px -3px rgba(0, 0, 0, 0.336);
   position: relative;
-  height: 230px;
+  /* height: 230px; */
+  height: auto;
   padding: 20px;
   padding-top: 10px;
   border: none;
   border-radius: 5px;
   background-color: #404056;
-
-  /* background-image: linear-gradient(
-    270deg,
-    hsla(263, 58%, 47%, 0.916) 0%,
-    hsla(226, 36%, 49%, 0) 100%
-  ); */
 }
 
 .arrears-details {
@@ -113,6 +110,7 @@ body {
 
 .payment-details {
   height: 230px;
+  margin-top: 25px;
 }
 
 /****************************/
@@ -131,6 +129,7 @@ body {
   margin-left: 15px;
   border-radius: 5px;
   background-color: #ffffff;
+  width: var(--input-width);
 }
 
 .overdue-container input,
@@ -139,8 +138,8 @@ body {
   width: var(--input-width);
   font-size: var(--input-font-size);
   color: var(--color-blue);
-  padding-top: 22px;
   /* keep padding to push curser down when typing*/
+  padding-top: 22px;
   border: none;
   outline: none;
   margin-left: 10px;
@@ -179,7 +178,7 @@ body {
 .overdue-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
-  bottom: -25px;
+  bottom: -26px;
   left: 15px;
   font-weight: 500;
   color: var(--color-blue);
@@ -250,7 +249,7 @@ body {
   transition: 0.4s;
   color: var(--color-blue);
   border: none;
-  margin-left: 15px;
+  margin-left: 5.5rem;
   box-shadow: var(--box-shadow-button);
   text-align: center;
   cursor: pointer;
@@ -263,9 +262,9 @@ body {
 }
 
 /* .select-wrapper::after { */
-.select-wrapper::after {
+.select-wrapper::before {
   content: "Billing day";
-  margin-left: 50px;
+  margin-left: 1rem;
   color: #fdfeff;
 }
 
@@ -282,29 +281,28 @@ body {
 /**************************/
 
 .frequency-toggle-container {
+  /* background-color: tomato; */
   position: relative;
-  /* padding: 10px 10px 20px 15px; */
   padding: 5px 10px 20px 15px;
   height: var(--input-height);
-  align-items: center;
-  text-align: center;
   margin-bottom: 5px;
 }
 
 input[type="checkbox"].frequency-input {
   opacity: 0;
   position: absolute;
-  left: -9000;
-  top: -9000;
 }
 
 input[type="checkbox"].frequency-input + label {
-  display: flex;
+  display: inline-flex;
+  /* display: flex; */
+  flex-direction: row-reverse;
+
   position: relative;
   font-size: 16px;
   align-items: center;
   color: #ffffff;
-  /*<<<<--- KEEP ME! to center text */
+  /*<<<<--- KEEP! to center text */
   cursor: pointer;
   /* stop highlighting text */
   -webkit-touch-callout: none;
@@ -339,7 +337,8 @@ input[type="checkbox"].frequency-input + label::before {
   -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.336) inset;
   /*  */
   border-radius: 5px;
-  margin-right: 3em;
+  left: 5.5rem;
+  /* margin-right: 3em; */
   /*<--- Margin for Label*/
 }
 
@@ -351,7 +350,7 @@ input[type="checkbox"].frequency-input + label::after {
   /*<<----- TO CENTER CONTENTS */
   align-items: center;
   /*<<----- TO CENTER CONTENTS */
-  left: 0.2em;
+  right: -0.45rem;
   top: 0.2em;
   bottom: 0;
   content: "Weekly";
@@ -404,6 +403,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
   height: 30px;
   margin-top: 10px;
   background-color: #ffffff;
+  left: 15.1rem;
   /* box-shadow: var(--box-shadow-button); */
   /*  */
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.336) inset;
@@ -433,6 +433,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
 
   color: var(--button--color);
   position: absolute;
+
   top: -10px;
   padding-left: 8px;
   font-weight: 400;
@@ -471,7 +472,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
 /* Min Pref Tag */
 .min-pref-label {
   position: relative;
-  left: 225px;
+  left: 1rem;
   top: 20px;
   cursor: pointer;
   color: var(--color-blue);
@@ -495,13 +496,24 @@ input[type="checkbox"].frequency-input:checked + label::after {
 /**************************/
 
 /* date picker */
+.date-picker-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: center;
+  position: relative;
+  top: 2.5rem;
+  right: 1.2rem;
+}
+
 .date-picker {
   position: relative;
   height: 32px;
   width: 110px;
-  margin-left: 15px;
-  margin-bottom: 20px;
-  margin-top: 45px;
+  /* margin-left: 15px; */
+  /* margin-bottom: 20px; */
+  /* margin-top: 45px; */
   padding-left: 2px;
   border-radius: 5px;
   box-shadow: var(--box-shadow-button);
@@ -515,7 +527,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
 
 input[type="date"] + label {
   display: inline-block;
-  margin-left: 30px;
+  margin-left: 2.2rem;
   /* color: var(--color-blue); */
   color: #ffffff;
 }
@@ -526,8 +538,8 @@ input[type="date"] + label {
 .regular-payment {
   display: inline-block;
   position: absolute;
-  left: 200px;
-  top: 193px;
+  left: 15rem;
+  top: 11rem;
   /* color: var(--color-blue); */
   color: #fdfeff;
 }
@@ -535,11 +547,11 @@ input[type="date"] + label {
 .regular-payment-amount {
   position: relative;
   display: inline-block;
-  margin-top: 10px;
-  margin-left: 16px;
+  margin-top: 3.5rem;
+  margin-left: 1rem;
   /* color: var(--color-blue); */
   color: #ffffff;
-  font-weight: 900;
+  font-weight: 400;
   font-size: large;
   border-radius: 2px;
 }
@@ -548,7 +560,7 @@ input[type="date"] + label {
   display: inline-block;
   position: absolute;
   width: fit-content;
-  top: 188px;
+  /* top: 188px; */
   /* left: 105px; */
   border-radius: 5px;
   transition: all 0.4s ease;
@@ -559,8 +571,8 @@ input[type="date"] + label {
   position: absolute;
   width: fit-content;
   padding: 5px;
-  left: 110px;
-  top: 188px;
+  left: 7rem;
+  top: 10.6rem;
   /* bottom: 32px; */
   font-size: var(--input-font-size);
   border: solid 2px var(--button--color);
@@ -574,8 +586,8 @@ input[type="date"] + label {
   display: inline-block;
   position: absolute;
   padding: 5px;
-  left: 110px;
-  top: 188px;
+  left: 7rem;
+  top: 10.6rem;
   /* bottom: 32px; */
   border: solid 2px var(--button--color);
   border-radius: 7px;
@@ -586,7 +598,7 @@ input[type="date"] + label {
 }
 
 /* Payment arrangement details */
-
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 /* <-- Proposed payment --> */
 
 .proposed-payment-container {
@@ -597,9 +609,10 @@ input[type="date"] + label {
   margin-bottom: 10px;
   box-shadow: var(--box-shadow-button);
   overflow: hidden;
-  margin-left: 15px;
+  margin-left: 1.05rem;
   border-radius: 5px;
   background-color: #ffffff;
+  width: var(--input-width);
 }
 
 .proposed-payment-container input {
@@ -644,7 +657,7 @@ input[type="date"] + label {
 .proposed-payment-container input:valid + .label .content-name::after {
   content: "\00024";
   position: absolute;
-  bottom: -24px;
+  bottom: -26px;
   left: 15px;
   font-weight: 500;
 }
@@ -663,19 +676,18 @@ input[type="date"] + label {
 }
 
 /* <-- ** --> */
-/* <-- ** --> */
+/* <-- *\\\\\\\\\\\\\\\\\\\\\\\**************************\\\\\\\\\\* --> */
 
 /* Number of payments */
 .number-of-payments-container {
+  display: inline-flex;
+  justify-content: space-between;
   position: relative;
-  width: 300px;
+  margin-left: 1.05rem;
+  width: var(--input-width);
   height: 40px;
-  display: inline-block;
+  align-items: center;
   position: relative;
-  /*  */
-  margin-left: 5px;
-  /*  */
-  padding-left: 15px;
 }
 
 .number-of-payments-container p {
@@ -683,8 +695,7 @@ input[type="date"] + label {
   display: inline-block;
   margin-left: 25px;
   color: rgb(20, 25, 120);
-  font-weight: 700;
-  font-size: larger;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
 }
@@ -698,24 +709,19 @@ input[type="date"] + label {
 
 /* Number of days */
 .number-of-days-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
-  width: 300px;
+  margin-left: 1.05rem;
+  position: relative;
+  width: var(--input-width);
   height: 40px;
-  display: inline-block;
-  position: relative;
-  /*  */
-  margin-left: 5px;
-  /*  */
-  padding-left: 15px;
 }
 
 .number-of-days-container p {
-  position: relative;
-  display: inline-block;
-  margin-left: 62px;
   color: rgb(20, 25, 120);
-  font-weight: 700;
-  font-size: larger;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
 }
@@ -729,15 +735,22 @@ input[type="date"] + label {
 
 /* Aditional amount */
 .aditional-amount-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
   position: relative;
-  width: 300px;
+  margin-left: 1.05rem;
+  position: relative;
+  width: var(--input-width);
+
   height: 40px;
-  display: inline-block;
-  position: relative;
+  /* display: inline-block; */
+  /* position: relative; */
   /*  */
-  margin-left: 5px;
+  /* margin-left: 5px; */
   /*  */
-  padding-left: 15px;
+  /* padding-left: 15px; */
 }
 
 .aditional-amount-container p {
@@ -746,15 +759,12 @@ input[type="date"] + label {
   display: inline-block;
   margin-left: 40px;
   color: rgb(20, 25, 120);
-  font-weight: 700;
-  font-size: larger;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
 }
 
 .aditional-amount-container label {
-  display: inline-block;
-  position: relative;
   top: 20px;
   color: #ffffff;
 }
@@ -762,26 +772,26 @@ input[type="date"] + label {
 /* <-- ** --> */
 /* Arrangement end date */
 .arrangement-end-date-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
   position: relative;
-  width: 300px;
+  width: var(--input-width);
+
   height: 40px;
-  display: inline-block;
-  position: relative;
+  /* display: inline-block; */
   /*  */
-  margin-left: 5px;
+  margin-left: 1rem;
   /*  */
-  padding-left: 15px;
+  /* padding-left: 15px; */
 }
 
 .arrangement-end-date-container p {
-  position: relative;
-  display: inline-block;
-  margin-left: 6px;
   color: rgb(20, 25, 120);
-  font-weight: 600;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
-  padding: 5px;
 }
 
 .arrangement-end-date-container label {
@@ -791,50 +801,44 @@ input[type="date"] + label {
 
 /* Regular payments resume */
 .regular-payments-resume-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 1rem;
   position: relative;
-  width: 300px;
+  width: var(--input-width);
   height: 40px;
-  display: inline-block;
-  position: relative;
 }
 
 .regular-payments-resume-container p {
-  position: relative;
-  display: inline-block;
-  margin-left: 14px;
   color: rgb(20, 25, 120);
-  font-weight: 600;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
-  padding: 5px;
 }
 
 .regular-payments-resume-container label {
   display: inline-block;
   color: #ffffff;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 /* Arrangement Total  */
 .arrangement-total-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
   position: relative;
-  width: 300px;
+  width: var(--input-width);
+
   height: 41px;
-  display: inline-block;
-  position: relative;
-  /*  */
-  margin-left: 5px;
-  /*  */
-  padding-left: 15px;
+  margin-left: 1rem;
 }
 
 .arrangement-total-container p {
-  position: relative;
-  display: inline-block;
-  margin-left: 35px;
   color: rgb(20, 25, 120);
-  font-weight: 700;
-  font-size: larger;
+  font-weight: 400;
   border-bottom: solid 2.5px yellow;
   color: var(--output-text-color);
 }
@@ -849,7 +853,7 @@ input[type="date"] + label {
   width: fit-content;
   display: block;
   position: relative;
-  margin-left: 185px;
+  margin-left: 15rem;
   border-radius: 10px;
   /*  */
   box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.44);
@@ -871,7 +875,7 @@ input[type="date"] + label {
   height: 30px;
   width: 100px;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 
 #clear_button button:hover {
@@ -881,13 +885,51 @@ input[type="date"] + label {
 /* <-- ** --> */
 /* extending arrangement-details to contain all elements  */
 .arrangement-details {
-  height: 390px;
+  height: 450px;
+}
+
+/* <---********************************************************************---> */
+/* <---***********************Q A Team requested to disable the ability to change due date - disabled on 29/01/2024*********************************************---> */
+.QA-container {
+  display: none;
+}
+#QA-checkbox {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  bottom: 68px;
+  left: 300px;
+}
+#QA-label {
+  color: var(--legend-text-color);
+  position: relative;
+  left: 23px;
+  bottom: 74px;
+  letter-spacing: 2px;
+  color: yellow;
+  font-size: 12px;
+}
+#QA-label span {
+  display: none;
+
+  border-bottom: 3px solid orange;
+}
+
+#QA-date-picker {
+  position: relative;
+  display: none;
+  left: 50px;
+  bottom: 65px;
+  height: 20px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
 }
 
 /* <---********************************************************************---> */
 /* <---********************************************************************---> */
 /* Media queries */
-@media only screen and (max-width: 500px) {
+/* @media only screen and (max-width: 500px) {
   body {
     background-color: #272737;
   }
@@ -911,4 +953,11 @@ input[type="date"] + label {
     background-color: #272737;
     height: auto;
   }
-}
+} */
+
+/*  */
+
+/* .arrangement-details-container {
+  background-color: tomato;
+  display: none;
+} */

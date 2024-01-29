@@ -1,31 +1,20 @@
 "use strict";
-//
-// check contract expiry date warning display
-//
-function warningToggle() {
-  const warning = document.getElementById("check-contract-expiry");
-  if (warning.style.display === "block") {
-    warning.style.display = "none";
-  } else {
-    warning.style.display = "block";
-  }
-}
-//
-// setInterval(warningToggle, 600);
-//
 
 // <---------^ EVENT_FUNCTION ^-------------->
 //  ------------------------------->
 const event_function = function () {
   // start with  values
-  //
-  // const warning = document.getElementById("check-contract-expiry");
-  let overdue = document.getElementById("overdue-input").value; //overdue value
+  let overDueBalance = document.getElementById("overdue-input").value; //overdue value
   const monthlyInstalment = document.querySelector(".monthly-instalment").value; //monthly instalment value
-  const instalement_Due_Day = document.querySelector(".select").value; //billing due day
-  const frequency = document.querySelector(".frequency-input").checked; //frequency
-  const annualised = document.getElementById("toggle_checkBox").checked; //min|pref pref = true -- min = false
-  let paymentStartDate = document.querySelector(".date-picker").value; //Start Date
+  const monthlyDue_DAY = document.querySelector(".select").value; //billing due day
+  const WeeklyFortnightlyPayCycle =
+    document.querySelector(".frequency-input").checked; //frequency --->> fortnightly = true -- weekly = false
+  //
+  // Annulaised is the total payment for the year didvided by the total number of weeks/fortnights in every year.. Referred to as minimum
+  // NOT annualised is the monthly payment divided by 2 is fortnightly or 4 if weekly
+  const annualisedPaymentorPreferred =
+    document.getElementById("toggle_checkBox").checked; //min|pref --->> pref = true -- min = false
+  let dateOfFirstPayment = document.querySelector(".date-picker").value; //Start Date
   const proposedArrangement = document.getElementById(
     "proposedArrangement"
   ).value; //proposed arrangement
@@ -34,20 +23,18 @@ const event_function = function () {
   );
   //
   ////// late_fees
-  const late_fees = 25;
-  //
-
+  const LATE_FEES = 25;
   //
   //
-  new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
+  //  Handle errors before variables are defined by the user
   // ???? overdue
   try {
-    if (!overdue) throw (overdue = 0);
+    if (!overDueBalance) throw (overDueBalance = 0);
   } catch (error) {
     //
   }
-  // ???? monthylInstalment
+  // ???? monthlyInstalment
   try {
     if (!monthlyInstalment) throw (monthlyInstalment = 0);
   } catch (error) {
@@ -55,144 +42,194 @@ const event_function = function () {
   }
   // ???? instalement_Due_Day
   try {
-    if (typeof instalement_Due_Day == "string") throw (instalement_Due_Day = 0);
+    if (typeof monthlyDue_DAY == "string") throw (monthlyDue_DAY = 0);
   } catch (error) {
     //
   }
-
+  // ???? paymentStartDate
   //
   try {
-    if (!paymentStartDate) throw (paymentStartDate = new Date());
+    if (!dateOfFirstPayment) throw (dateOfFirstPayment = new Date());
   } catch (error) {
     //
   }
+  ////////////////////////////////////////////////////////////////////////////////////////
 
-  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
-  const regularPayment = document.querySelector(".regular-payment-amount");
-  let regular_amount = 0;
-  let freq = 0;
-  // fortnightly && min
-  if (frequency && !annualised) {
-    //
-    freq = 14;
-    regular_amount = monthlyInstalment / 2.165;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "fortnightly";
-    weeklyFortnightlyTag.classList.remove("weekly");
-    weeklyFortnightlyTag.classList.add("fortnightly");
-    //
-    document.querySelector(".min-pref-label").innerHTML = "Minimum";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-    // fortnightly && pref
-  } else if (frequency && annualised) {
-    //
-    freq = 14;
-    regular_amount = monthlyInstalment / 2;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "fortnightly";
-    weeklyFortnightlyTag.classList.remove("weekly");
-    weeklyFortnightlyTag.classList.add("fortnightly");
-    //
-    document.querySelector(".min-pref-label").innerHTML = "Preferred";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-  }
-  // weekly && min
-  else if (!frequency && !annualised) {
-    //
-    freq = 7;
-    regular_amount = monthlyInstalment / 4.33;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
+  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_CalculateRegularPayment-_-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
+
+  const CalculateRegularPayment = function (
+    frequency,
+    minimum_or_preferred,
+    monthlyInstalment
+  ) {
+    let regular_amount = 0; // Define regular amount variable
+    let freq = 0; // Define frequesncy variable
+    const FORTNIGHTLY_CONVERSION_FACTOR = 2.165;
+    const WEEKLY_CONVERSION_FACTOR = 4.33;
+
+    // fortnightly && min
+    if (frequency && !minimum_or_preferred) {
+      //
+      freq = 14;
+      regular_amount = monthlyInstalment / FORTNIGHTLY_CONVERSION_FACTOR; // divide the monthly amount by 2.165 to get the annualised FORTNIGHTLY amount
+      // fortnightly && pref
+    } else if (frequency && minimum_or_preferred) {
+      //
+      freq = 14;
+      regular_amount = monthlyInstalment / 2;
+    }
+    // weekly && min
+    else if (!frequency && !minimum_or_preferred) {
+      //
+      freq = 7;
+      regular_amount = monthlyInstalment / WEEKLY_CONVERSION_FACTOR; // divide the monthly amount by 4.33 to get the annualised WEEKLY amount
+    }
+    // Weekly && Pref
+    else if (!frequency && minimum_or_preferred) {
+      //
+      freq = 7;
+      regular_amount = monthlyInstalment / 4;
+    }
+    return [regular_amount, freq];
+  };
+  //-*****      <<-_-_-_-_-_-_-_-_-_-_-_ _-_-_-_-_-_-_-_-_-_-_-_-_->>        *****-//
+
+  const [regular_amount, frequency] = CalculateRegularPayment(
+    WeeklyFortnightlyPayCycle,
+    annualisedPaymentorPreferred,
+    monthlyInstalment
+  );
+  //
+
+  //
+  document.querySelector(".regular-payment-amount").innerHTML =
+    regular_amount.toFixed(2); // DOM Regular Payment // Display the regular payment amount - user feedback
+  //
+
+  if (frequency == 7) {
     weeklyFortnightlyTag.textContent = "weekly";
     weeklyFortnightlyTag.classList.remove("fortnightly");
     weeklyFortnightlyTag.classList.add("weekly");
-    //
+  } else if (frequency == 14) {
+    weeklyFortnightlyTag.textContent = "fortnightly";
+    weeklyFortnightlyTag.classList.remove("weekly");
+    weeklyFortnightlyTag.classList.add("fortnightly");
+  }
+  //
+  if (!annualisedPaymentorPreferred) {
     document.querySelector(".min-pref-label").innerHTML = "Minimum";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
-  }
-  // Weekly && Pref
-  else if (!frequency && annualised) {
-    //
-    freq = 7;
-    regular_amount = monthlyInstalment / 4;
-    regularPayment.innerHTML = regular_amount.toFixed(2);
-    //
-    weeklyFortnightlyTag.textContent = "weekly";
-    weeklyFortnightlyTag.classList.remove("fortnightly");
-    weeklyFortnightlyTag.classList.add("weekly");
-    //
+    document.querySelector(".min-pref-label").style.fontWeight = 400;
+  } else {
     document.querySelector(".min-pref-label").innerHTML = "Preferred";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
-    //
+    document.querySelector(".min-pref-label").style.fontWeight = 400;
   }
+
   //
   //  ///------------------***********--------------///
   // Loop through DatesList and increment by 7 or 14 days
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
   const regularPaymentDates = function (interval, paymentStartDate) {
-    const paymentDates = [];
+    // interval is the frequency 7 || 14
     // ------- //
-    // Range of dates in array dates[]
+    // Function that finds the range between 2 dats and place it in array ->  datesInRange[]... Should return 365 dates..
+    // We need to find the range of dates between PaymentStartDate and same start date for next year.
     const getDatesInRange = function (startDate, endDate) {
-      const date = new Date(startDate);
-      const dates = [];
-      while (date <= endDate) {
-        dates.push(new Date(date));
-        date.setDate(date.getDate() + 1);
+      const datesInRange = [];
+      const date_InRange = new Date(startDate);
+      while (date_InRange <= endDate) {
+        datesInRange.push(new Date(date_InRange));
+        date_InRange.setDate(date_InRange.getDate() + 1);
       }
-      return dates;
+      return datesInRange;
     };
-    //
-    // Date next year
+    // ----------------------------Function that returns the paymentStartDate date next year.
     const getDateNextYear = function (dt) {
-      let nextYear = new Date(dt);
-      nextYear.setDate(nextYear.getDate() + 365);
-      return nextYear;
+      let dateNextYear = new Date(dt);
+      const NUMBER_OF_DAYS_IN_A_YEAR = 365;
+      dateNextYear.setDate(dateNextYear.getDate() + NUMBER_OF_DAYS_IN_A_YEAR);
+      return dateNextYear;
     };
-    // ------- //
+    // ---------------------------create a list of dates using getDatesInRange function
     const oneYearDatesList = getDatesInRange(
       paymentStartDate,
       getDateNextYear(paymentStartDate)
     );
+    let paymentDates = [];
     //
-    for (let i = 0; i <= oneYearDatesList.length; i += interval) {
-      paymentDates.push(new Date(oneYearDatesList[i].setHours(0, 0, 0, 0)));
-    }
+    // for (let i = 0; i <= oneYearDatesList.length; i += interval) {
+    // paymentDates.push(new Date(oneYearDatesList[i].setHours(0, 0, 0, 0)));
+    // }
+    // -------------------------- Use filter() method here to replace for loop:
+    paymentDates = oneYearDatesList.filter((dte, i) => {
+      return i % interval == 0;
+    });
+    //
     return paymentDates;
   };
-  const regular_dates = regularPaymentDates(freq, paymentStartDate);
+  // ------------------------------------------------------------------------
+  const regularWeeklyOrFortnightlyDates = regularPaymentDates(
+    frequency,
+    dateOfFirstPayment
+  );
 
-  // Convert due day to due full date
+  //
+
+  // Set today's date ---> for Quality Assurance Team (CLIENT) to change today's date
+  // NO LONGER REQUIRED - CODE REMAINS IN CASE CLIENT REQUESTS IT BACK ON
+  const setTodayDate = function () {
+    const QACheckBox = document.getElementById("QA-checkbox").checked;
+    const QADatePicker = document.getElementById("QA-date-picker");
+    let todayDate = new Date(QADatePicker.value);
+    if (QACheckBox) {
+      QADatePicker.style.display = "block";
+      return new Date(todayDate.setHours(0, 0, 0, 0));
+    } else {
+      QADatePicker.style.display = "none";
+      todayDate = new Date();
+      return new Date(todayDate.setHours(0, 0, 0, 0));
+    }
+  };
+  // const dateOfToday = setTodayDate();
+  //
+  const dateOfToday = new Date().setHours(0, 0, 0, 0);
+  //
+  // Convert due day to due full date - constructs a full due date dd-mm-yyyy
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
-  const instalementDueFullDate = function (instalementDueDay) {
-    const today = new Date(); // ->   "2023-01-31"
-    let dueFullDate = new Date(); // ->   "2023-01-31"    // change to const
+  // in this function we need to check if the due-DAY is before or after today's date. we first create an arbitrary due date based on the month we are in \ eg. if due-Day is 15th, we create a due date = 15th-currentMonth-currentYear\
+  // Then we check if the initial arbitrary date is greater than or less than today's date.
+  //If the initial dtae is GREATER than today's date, then the next first due-DATE is THIS month and is later this month.
+  //If the initial date is LESS than today's date, then the next first due-DATE is NEXT month.
+  // We also need to account for leap years..
+  //
+  // IN THE ORIGIONAL Excel Sheet ALL MONTHS WERE 30 DAYS (NO 31 DAYS MONTHS) - - - -  MUST MATCH Excel Sheet
+  //
+  const MonthlyInstalementDueDate = function (instalementDueDay, dateOfToday) {
+    // const today = new Date(); // -> test for  "2023-01-31" // // "2023-09-01"
+    // let dueFullDate = new Date(); // -> test for  "2023-01-31"    // // "2023-09-01"
+
+    const today = new Date(dateOfToday);
+    let dueFullDate = new Date(dateOfToday);
     dueFullDate.setDate(Number(instalementDueDay));
     //
+    // accounting for February and Leap years...
     if (
-      Number(instalementDueDay) > 28 &&
-      Number(today.getMonth()) == 0 &&
-      dueFullDate < today
+      Number(instalementDueDay) > 28 && // If due-DAY is GREATER than 28th of the month.
+      Number(today.getMonth()) == 0 && // if in January and due-DATE is GREATER than 28th
+      dueFullDate <= today // if arbitrary due-DATE is LESS than today's date
     ) {
       dueFullDate = new Date(today.getFullYear(), 2, 0);
     }
-    //
+    //   // If we're in February and due-DAY is gretaer than 28th of the month.
     else if (
-      Number(instalementDueDay) > 28 &&
-      Number(today.getMonth()) == 1 &&
-      dueFullDate > today
+      Number(instalementDueDay) > 28 && // If due-DAY is GREATER than 28th of the month.
+      Number(today.getMonth()) == 1 && // if in February and due-DATE is GREATER than 28th
+      dueFullDate >= today // if arbitrary due-DATE is GREATER than or equal to today's date
     ) {
       dueFullDate = new Date(today.getFullYear(), 2, 0);
     }
 
     //
-    if (dueFullDate <= today) {
-      // or =
+    else if (dueFullDate <= today) {
       dueFullDate = new Date(
         today.getFullYear(),
         today.getMonth() + 1,
@@ -204,199 +241,227 @@ const event_function = function () {
     //
     return dueFullDate;
   };
+  //
+  const dueDate = MonthlyInstalementDueDate(monthlyDue_DAY, dateOfToday);
+  //
+  //
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
 
-  // Due_Dates_List
+  // -------------------------------------------------  Due_Dates_List
+  // Function that generates a list of 12 due dates for the whole year
+  // This function starts with checking if the due-DAY is less than 28.. If less than 28, increment the months in the dates by 1 and add it to the dueDates list.
+  // If due-Day is greater than 28, we need to acccout for February..
+  // to account for February, we create an array where we store all the months in the initial dueDates list... we check if the list includes February - checking for index [1]-..
+  // Then we find the index of January and plug it in to get the last date of February
+  // We need to get the last date of March.
+  // Using the splice() method we insert the last date of February and March after January in the dueDates list to have a full 12 months list..
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
-  const Due_Dates_List = function (dueDate) {
-    const Dates_List = [];
-    // if LESS than or == 28
-    if (instalement_Due_Day <= 28) {
-      Dates_List.push(dueDate);
-      for (let i = 0; i < 11; i++) {
-        dueDate = new Date(
-          dueDate.getFullYear(),
-          dueDate.getMonth(),
-          instalement_Due_Day
-        );
-        dueDate.setMonth(dueDate.getMonth() + 1);
-        Dates_List.push(dueDate);
-      }
-    }
-    //
-    // if GREATER than or == 28
-    else if (instalement_Due_Day >= 28) {
-      Dates_List.push(dueDate);
-      for (let i = 0; i < 11; i++) {
+  const ListOfMonthlyDueDates = function (dueDate) {
+    // create an empty array to store the date in
+    const dueDates = [];
+    // Function to increment months by one and push into the ListOfDueDates
+    const incrementMonthsInDueDate = () => {
+      dueDates.push(dueDate); // Push the first due date into the array first
+      const NUMBER_OF_MONTHS = 11;
+      for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         dueDate = new Date(
           dueDate.getFullYear(),
           dueDate.getMonth() + 1,
-          instalement_Due_Day
+          monthlyDue_DAY
         );
-        Dates_List.push(dueDate);
+        dueDates.push(dueDate);
       }
-      // Make a list of months in the due dates list
+      return dueDates;
+    };
+    // if monthlyDueDay is LESS than or == 28, increment the months by 1 and push into the list
+    if (monthlyDue_DAY <= 28) {
+      incrementMonthsInDueDate();
+    }
+    // if monthlyDueDay is GREATER than or == 28, we need to account for February when the due_DAY is greater than 28th
+    else if (monthlyDue_DAY >= 28) {
+      incrementMonthsInDueDate();
+      // to make sure that February is in our list of due dates
+      // Create a list of the months in the due dates list
       const months = [];
-      for (let i = 0; i < Dates_List.length; i++) {
-        const month = Dates_List[i].getMonth();
-        months.push(month);
-      }
-      // Find out if months contains Feb
+      // exctract the months from the dueDates array and push it into the new months[] array.
+      dueDates.map((dte) => {
+        months.push(dte.getMonth());
+      });
+      // Find out if months[] contains February or not
       if (!months.includes(1)) {
-        // Find the January index
+        // Find the January index to use in creating the last day in February
         const januaryIndex = months.indexOf(0);
-        // create last date of February
+        // find the last date of February
         const LastDateFebruary = new Date(
-          Dates_List[januaryIndex].getFullYear(),
+          dueDates[januaryIndex].getFullYear(),
           2,
           0
         );
+        // find the last date of March
         const LastDateMarch = new Date(
-          Dates_List[januaryIndex].getFullYear(),
+          dueDates[januaryIndex].getFullYear(),
           2,
-          Number(instalement_Due_Day)
+          Number(monthlyDue_DAY)
         );
-        Dates_List.splice(januaryIndex + 1, 1, LastDateFebruary);
-        Dates_List.splice(januaryIndex + 2, 0, LastDateMarch);
+        dueDates.splice(januaryIndex + 1, 1, LastDateFebruary); // use Splice() method to insert the last date in February after January
+        dueDates.splice(januaryIndex + 2, 0, LastDateMarch); // use Splice() method to insert the last date in March after February
       }
-      //
     }
-    return Dates_List;
+    return dueDates;
   };
-  const due_dates = Due_Dates_List(instalementDueFullDate(instalement_Due_Day));
+  // -----------------------------------------------
+  const due_dates = ListOfMonthlyDueDates(
+    MonthlyInstalementDueDate(monthlyDue_DAY, dateOfToday)
+  );
 
-  // Calculate balances
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------  Calculate balances
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
-  const cal_balances = function (dueDatesList, regularDatesList) {
+  const cal_balances = function (dueDatesList, regularPaymentDatesList) {
     const balances = [];
-
     // loop through paymentDates
     for (
-      let i = 0, c = 0, balance = Number(overdue);
-      i < regularDatesList.length;
-      i++
+      let index = 0, counter = 0, balance = Number(overDueBalance);
+      index < regularPaymentDatesList.length;
+      index++
     ) {
-      let due_date = dueDatesList[c];
+      let due_date = dueDatesList[counter];
 
       // if payment date is LESS than due date
-      if (regularDatesList[i] < due_date) {
+      if (regularPaymentDatesList[index].setHours(0, 0, 0, 0) < due_date) {
         balance -= Number(proposedArrangement);
         balances.push(balance);
       }
       // if payment date is GREATER than due date
-      if (regularDatesList[i] >= due_date) {
+      if (regularPaymentDatesList[index].setHours(0, 0, 0, 0) >= due_date) {
         balance =
           balance +
-          late_fees +
+          LATE_FEES +
           Number(monthlyInstalment) -
           Number(proposedArrangement);
         balances.push(balance);
-        c++;
+        counter++;
       }
     }
     return balances;
   };
+  //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  const balances_list = cal_balances(
+    due_dates,
+    regularWeeklyOrFortnightlyDates
+  );
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
 
-  const balances_list = cal_balances(due_dates, regular_dates);
-
-  // cal_net_balances function          ****************************
+  // -------------------------------------------------cal_net_balances function          ****************************
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
-  const cal_net_balances = function (
-    overDue,
-    regularDatesList,
-    dueDatesList,
-    balancesList,
-    monthlyAmt,
-    //
-    regularAmt,
-    lateFees
-  ) {
+  const cal_net_balances = function () // overDue,
+  // regularDatesList,
+  // dueDatesList,
+  // balancesList,
+  // monthlyAmt,
+  //
+  // regularAmt,
+  // lateFees
+  {
     // Find the initial Net_Balance value  if the FIRST regular date is greater than the FIRST due date
     let initNetBalance;
-    if (regularDatesList[0] > dueDatesList[0]) {
-      const numOfPmtsBeforeFirstDueDate = regularDatesList.filter(function (
-        date
-      ) {
-        return date <= dueDatesList[1];
-      }).length;
-      initNetBalance = Number(overDue) + lateFees + Number(monthlyAmt);
+    // CONDITION:: if FIRST reguldar date is greater than FIRST due date! Find the number of regular payments before the first due date
+    if (regularWeeklyOrFortnightlyDates[0] > due_dates[0]) {
+      const numOfPmtsBeforeFirstDueDate =
+        regularWeeklyOrFortnightlyDates.filter(function (date) {
+          return date <= due_dates[1];
+        }).length;
+      // usethe number of payments before the first due date to calculate the initial net_balance to match the excel sheet
+      initNetBalance =
+        Number(overDueBalance) + LATE_FEES + Number(monthlyInstalment);
+      //
       initNetBalance =
         initNetBalance +
-        Number(monthlyAmt) +
-        Number(lateFees) -
-        Number(regularAmt) * numOfPmtsBeforeFirstDueDate;
+        Number(monthlyInstalment) +
+        Number(LATE_FEES) -
+        Number(regular_amount) * numOfPmtsBeforeFirstDueDate;
     }
-    // CONDITION:: if FIRST reguldar date is greater than FIRST due date !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    const copyOfRegularDates = regularDatesList.slice();
-    const numOfPmtsBeforeFirstDueDate = [];
-    const net_balances = [];
     //
-    for (let i = 0, c = 0; i < regularDatesList.length; i++) {
-      if (regularDatesList[i] < dueDatesList[c]) {
+    //
+    const copyOfRegularDates = regularWeeklyOrFortnightlyDates.slice(); //create a copy of regularWeeklyOrFortnightlyDates[] --
+    const numOfPmtsBeforeFirstDueDate = []; // create an array to find how many payments there are before the first due date
+    const net_balances = []; // and empty array to store the net balances.
+    //
+    // Loop through the regular weekly/fortnightlydates[] list
+    for (let i = 0, c = 0; i < regularWeeklyOrFortnightlyDates.length; i++) {
+      // if the regular payment date is LESS than the first due date?
+      if (regularWeeklyOrFortnightlyDates[i] < due_dates[c]) {
         //
+        // If so, then filter out the regular payment dates that are LESS than (come before) the first due date and push into FilteredList[]
         const filteredList = copyOfRegularDates.filter(function (dte) {
-          return dte <= dueDatesList[c];
+          return dte <= due_dates[c];
         });
-        numOfPmtsBeforeFirstDueDate.push(Number(filteredList.length));
-        copyOfRegularDates.shift();
+        //
+        numOfPmtsBeforeFirstDueDate.push(Number(filteredList.length)); // find out how many payments there are before the first due date
+        copyOfRegularDates.shift(); // Remove the first date in the regular payments dates list
         net_balances.push(
-          Number(balancesList[i]) +
-            Number(lateFees) +
-            Number(monthlyAmt) -
-            Number(regularAmt) * Number(numOfPmtsBeforeFirstDueDate[i] - 1)
+          // add the net balances into the net_balances list[]
+          Number(balances_list[i]) +
+            Number(LATE_FEES) +
+            Number(monthlyInstalment) -
+            Number(regular_amount) * Number(numOfPmtsBeforeFirstDueDate[i] - 1)
         );
-      } else if (regularDatesList[i] >= dueDatesList[c]) {
+        //
+        // if the regular payment date is GREATER than or EQUAL to the first due date?
+      } else if (regularWeeklyOrFortnightlyDates[i] >= due_dates[c]) {
         c++;
         const filteredList = copyOfRegularDates.filter(function (dte) {
-          return dte <= dueDatesList[c];
+          // new list with dates that are LESS than the due date
+          return dte <= due_dates[c];
         });
         numOfPmtsBeforeFirstDueDate.push(filteredList.length);
         copyOfRegularDates.shift();
         net_balances.push(
-          Number(balancesList[i]) +
-            Number(lateFees) +
-            Number(monthlyAmt) -
-            Number(regularAmt) * (Number(numOfPmtsBeforeFirstDueDate[i]) - 1)
+          Number(balances_list[i]) +
+            Number(LATE_FEES) +
+            Number(monthlyInstalment) -
+            Number(regular_amount) *
+              (Number(numOfPmtsBeforeFirstDueDate[i]) - 1)
         );
       }
     }
+    //
     return [net_balances, numOfPmtsBeforeFirstDueDate];
   };
   //
+  const [net_balances, numOfRegPmts] = cal_net_balances();
 
-  const [net_balances, numOfRegPmts] = cal_net_balances(
-    overdue,
-    regular_dates,
-    due_dates,
-    balances_list,
-    monthlyInstalment,
-    regular_amount,
-    late_fees
-  );
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // -------------------------------NOE THAT WE HAVE CALCULATED THE NET BALANCES, WE CAN DISPLAY THE RESULTS TO THE USER--------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
 
   //    ----------------------------- ***** -------------------------- //
 
-  // Additional amount
-  let additional_amount = (
+  // Calculate additional amount
+  let additionalAmount = (
     Number(proposedArrangement) - Number(regular_amount)
   ).toFixed(2);
   //
-  if (additional_amount < 0) {
-    additional_amount = 0;
+  if (additionalAmount < 0) {
+    additionalAmount = 0;
   }
-  //
-  // --
+
   let index_of_balance = net_balances.findIndex(function (balance, i) {
+    // find the index of thwe first balance where the net_balance is less than ZERO - account is no longer overdue
     return balance < 0;
   });
-
-  if (overdue < 0) {
-    index_of_balance -= 1;
-  }
-
   //
-  // arrangement_details -> Number of payment required   ------ --------//
-  const arrangement_details = function (regularDatesList, indexOfBalance) {
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+
+  //------------------------------------------------- arrangement_details -> Number of payment required   ------ --------//
+  // Returns the arrangement end date, number of days required in the arrangement and the date the regular paymwnt will resume from
+  const arrangementDetails = function (regularDatesList, indexOfBalance) {
     //
     if (indexOfBalance < 0) {
       indexOfBalance = 0;
@@ -408,7 +473,7 @@ const event_function = function () {
     const paymentsResume = regularDatesList[indexOfBalance + 1];
 
     // Number of days
-    const today_date = new Date(); /////////////////////
+    const today_date = new Date(dateOfToday); /////////////////////
     //
     //
     let number_of_days =
@@ -419,10 +484,12 @@ const event_function = function () {
     return [arr_end_date, Math.round(number_of_days), paymentsResume];
   };
   //
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+
   //
-  //
-  let [arrangement_end_date, numOf_days, Payments_resume] = arrangement_details(
-    regularPaymentDates(freq, paymentStartDate),
+  let [arrangement_end_date, numOf_days, Payments_resume] = arrangementDetails(
+    regularPaymentDates(frequency, dateOfFirstPayment),
     index_of_balance
   );
   //
@@ -440,7 +507,11 @@ const event_function = function () {
   } catch (error) {
     //
   }
-  //-                 --            Display results             --                      -//
+
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------------------------
+
+  //-                 --            Display results using the DOM             --                      -//
 
   // Number of payments
   document.getElementById("num_of_payments").innerText = numOf_payments;
@@ -455,7 +526,7 @@ const event_function = function () {
   //
   document.getElementById(
     "additionalPaymentAmount"
-  ).innerText = `$ ${additional_amount}`;
+  ).innerText = `$ ${additionalAmount}`;
   //   --   --  //
   // Arragement end date
   const year = arrangement_end_date.toLocaleString("default", {
@@ -493,13 +564,14 @@ const event_function = function () {
     arrangement_total.toFixed(2)
   )}`;
   //
-  //
 };
+
+//
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
-// =--------_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_------= //
+// =-----_--_-_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_-_-_-_-_-_-_--_-_-_-_-_--_-_-__-_----= //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
 // --------------------------------------------------------------------------------- //
@@ -521,11 +593,6 @@ document
 //
 // "Billing day" tag value
 
-document.querySelector(".wrapper").addEventListener("click", function () {
-  if (document.getElementById("dropdown-list").value !== "Billing due day") {
-    document.querySelector(".wrapper").classList.add("select-wrapper");
-  }
-});
 document.querySelector(".select").addEventListener("click", event_function);
 //
 document
@@ -546,14 +613,22 @@ document
 
 // Clear button
 document.getElementById("clear_button").addEventListener("click", () => {
-  document.getElementById("num_of_payments").innerText = "_ _ _";
-  document.getElementById("num_of_days").innerText = "_ _ _";
-  document.getElementById("arrangement-end-date").innerText = "_ _ _";
-  document.getElementById("regular-payments-resume").innerText = "_ _ _";
-  document.getElementById("additionalPaymentAmount").innerText = "_ _ _";
-  document.getElementById("arrangement-total").innerText = "_ _ _";
+  document.getElementById("num_of_payments").innerText = "";
+  document.getElementById("num_of_days").innerText = "";
+  document.getElementById("arrangement-end-date").innerText = "";
+  document.getElementById("regular-payments-resume").innerText = "";
+  document.getElementById("additionalPaymentAmount").innerText = "";
+  document.getElementById("arrangement-total").innerText = "";
   document.querySelector(".regular-payment-amount").innerText = "";
   document.querySelector(".min-pref-label").innerText = "Minimum";
 });
 
 /////////----------------------------------------///////////////
+// QA date // DISABLED ON 29/01/2024 UPON CLIENT'S REQUEST
+// document
+//   .getElementById("QA-checkbox")
+//   .addEventListener("change", event_function);
+// //
+// document
+//   .getElementById("QA-date-picker")
+//   .addEventListener("input", event_function);

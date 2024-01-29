@@ -89,7 +89,7 @@
 
           <!-- DROP-DOWN -->
           <!-- <div class="dropdown"> -->
-          <div class="wrapper">
+          <div class="select-wrapper">
             <select id="dropdown-list" class="select">
               <!-- <div class="dropdown-content"> -->
               <option disabled selected>Billing due day</option>
@@ -131,7 +131,15 @@
           <!-- </div> -->
         </fieldset>
 
-        <fieldset class="payment-details">
+        <!-- Monthly // Fortnightly - Weekly buttons  -->
+        <!-- <div class="tabs">
+          <button type="button" class="fortnightly-weekly-button">
+            Fortnightly / Weekly
+          </button>
+          <button type="button" class="monthly-button">Monthly</button>
+        </div> -->
+
+        <fieldset class="payment-details show">
           <legend class="inner-legend">Current payment details</legend>
 
           <!-- FREQUENCY TOGGLE -->
@@ -150,7 +158,7 @@
           </label>
 
           <!-- Date Picker -->
-          <div>
+          <div class="date-picker-wrapper">
             <input class="date-picker" type="date" />
             <label id="payment-date-label">Payment start date</label>
           </div>
@@ -161,13 +169,46 @@
           <tag class="regular-payment">Regular payment</tag>
           <tag class="weekly-fortnightly-tag"></tag>
         </fieldset>
+        <!--  -->
+        <!--  Monthly payment details ------------------------------------->
+        <!--  Monthly payment details ------------------------------------->
+        <!--  Monthly payment details ------------------------------------->
+        <!--  Monthly payment details ------------------------------------->
+
+        <!--  -->
+        <!-- <fieldset class="monthly-arrangement-details" id="month-wrapper">
+          <legend class="inner-legend">Monthly arrangement details</legend>
+          <div class="number-of-months-container">
+            <label> Number of months</label>
+            <input class="num-of-months" type="text" />
+          </div>
+           <div id="months-dates-and-input-wrapper">
+            <div id="months-dates-containter"></div>
+ 
+            <div id="months-input-container"></div>
+          </div>
+           <div>
+            <div class="amount-per-month">
+              <label class="amount-per-month-label"></label>
+              <label> Amount per month</label>
+            </div>
+ 
+            <div class="total-monthly-arrangement">
+              <label class="total-monthly-label"></label>
+              <label> Total monthly arrangement</label>
+            </div>
+          </div>
+         </fieldset> -->
+        <!--  -->
       </fieldset>
 
       <!-- ///////////////////////////////////////// -->
       <!-- Payment Arrangement Details -->
-      <fieldset class="arrangement-details-container">
-        <legend class="outer-legend">Payment arrangement details</legend>
-        <div class="arrangement-details">
+      <fieldset class="arrangement-details-container show">
+        <legend class="outer-legend arrangement-outer-legend">
+          Payment arrangement details
+        </legend>
+        <div class="arrangement-details show">
           <!-- <div class="proposed-payment-container"> 
 </div> -->
 
@@ -211,13 +252,13 @@
 </div> -->
           <div class="arrangement-end-date-container">
             <label> Arrangement end date </label>
-            <p id="arrangement-end-date">_ _ _</p>
+            <p id="arrangement-end-date"></p>
           </div>
 
           <!-- Regular payment resume date -->
           <div class="regular-payments-resume-container">
             <label> Payments resume on</label>
-            <p id="regular-payments-resume">_ _ _</p>
+            <p id="regular-payments-resume"></p>
           </div>
 
           <!-- Arrangement total -->
@@ -232,8 +273,18 @@
           </div>
           <!--  -->
         </div>
+        <!-- Q A Date picker -->
+        <!-- THIS WAS DISABLED ON 29/01/2024 UPON CLIENT'S REQUEST---->
+        <div class="QA-container">
+          <input id="QA-checkbox" type="checkbox" />
+          <label id="QA-label">
+            CHANGE TODAY'S DATE - <span> QA ONLY </span></label
+          >
+          <input id="QA-date-picker" type="date" />
+        </div>
       </fieldset>
     </form>
+
     <script src="script.js"></script>
     <!-- Christmas JS file -->
     <!-- <script src="christmas.js"></script> -->
