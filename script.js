@@ -29,6 +29,7 @@ const event_function = function () {
   // new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
 
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
+  //  Handle errors before variables are defined by the user
   // ???? overdue
   try {
     if (!overDueBalance) throw (overDueBalance = 0);
