@@ -119,10 +119,10 @@ const event_function = function () {
   //
   if (!annualisedPaymentorPreferred) {
     document.querySelector(".min-pref-label").innerHTML = "Minimum";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
+    document.querySelector(".min-pref-label").style.fontWeight = 400;
   } else {
     document.querySelector(".min-pref-label").innerHTML = "Preferred";
-    document.querySelector(".min-pref-label").style.fontWeight = 900;
+    document.querySelector(".min-pref-label").style.fontWeight = 400;
   }
 
   //
@@ -190,10 +190,9 @@ const event_function = function () {
       return new Date(todayDate.setHours(0, 0, 0, 0));
     }
   };
-  // console.log(setTodayDate());
-  const dateOfToday = setTodayDate();
+  // const dateOfToday = setTodayDate();
   //
-
+  const dateOfToday = new Date().setHours(0, 0, 0, 0);
   //
   // Convert due day to due full date - constructs a full due date dd-mm-yyyy
   //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////  //////-_-_-_-_---_-_--_-__-__-__-__-_-_--_--_-__-__----////////////
@@ -626,11 +625,11 @@ document.getElementById("clear_button").addEventListener("click", () => {
 });
 
 /////////----------------------------------------///////////////
-// QA date //
-document
-  .getElementById("QA-checkbox")
-  .addEventListener("change", event_function);
-//
-document
-  .getElementById("QA-date-picker")
-  .addEventListener("input", event_function);
+// QA date // DISABLED ON 29/01/2024 UPON CLIENT'S REQUEST
+// document
+//   .getElementById("QA-checkbox")
+//   .addEventListener("change", event_function);
+// //
+// document
+//   .getElementById("QA-date-picker")
+//   .addEventListener("input", event_function);
