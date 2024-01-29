@@ -682,7 +682,6 @@ input[type="date"] + label {
 .number-of-payments-container {
   display: inline-flex;
   justify-content: space-between;
-  position: relative;
   margin-left: 1.05rem;
   width: var(--input-width);
   height: 40px;
@@ -714,7 +713,6 @@ input[type="date"] + label {
   align-items: center;
   position: relative;
   margin-left: 1.05rem;
-  position: relative;
   width: var(--input-width);
   height: 40px;
 }
@@ -741,7 +739,6 @@ input[type="date"] + label {
 
   position: relative;
   margin-left: 1.05rem;
-  position: relative;
   width: var(--input-width);
 
   height: 40px;
@@ -755,8 +752,10 @@ input[type="date"] + label {
 
 .aditional-amount-container p {
   position: relative;
-  position: absolute;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
   margin-left: 40px;
   color: rgb(20, 25, 120);
   font-weight: 400;
