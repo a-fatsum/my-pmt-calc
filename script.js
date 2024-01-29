@@ -26,8 +26,6 @@ const event_function = function () {
   const LATE_FEES = 25;
   //
   //
-  // new Date(paymentStartDate).max = new Date().toISOString().split("T")[5];
-
   /////////////////////////////////////////////////////////////ERROR HANDLING////////////////
   //  Handle errors before variables are defined by the user
   // ???? overdue
