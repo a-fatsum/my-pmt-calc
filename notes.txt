@@ -1,2 +1,1 @@
-- create a script file for html dom 
-- export all variables from script.js 
+ 

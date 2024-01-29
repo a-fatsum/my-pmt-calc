@@ -614,12 +614,12 @@ document
 
 // Clear button
 document.getElementById("clear_button").addEventListener("click", () => {
-  document.getElementById("num_of_payments").innerText = "_ _ _";
-  document.getElementById("num_of_days").innerText = "_ _ _";
-  document.getElementById("arrangement-end-date").innerText = "_ _ _";
-  document.getElementById("regular-payments-resume").innerText = "_ _ _";
-  document.getElementById("additionalPaymentAmount").innerText = "_ _ _";
-  document.getElementById("arrangement-total").innerText = "_ _ _";
+  document.getElementById("num_of_payments").innerText = "";
+  document.getElementById("num_of_days").innerText = "";
+  document.getElementById("arrangement-end-date").innerText = "";
+  document.getElementById("regular-payments-resume").innerText = "";
+  document.getElementById("additionalPaymentAmount").innerText = "";
+  document.getElementById("arrangement-total").innerText = "";
   document.querySelector(".regular-payment-amount").innerText = "";
   document.querySelector(".min-pref-label").innerText = "Minimum";
 });
