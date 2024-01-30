@@ -533,67 +533,68 @@ input[type="date"] + label {
 }
 
 /**************************/
-/**** current payment Display ******/
+/**** current payment Display --- regular payment ******/
 /**************************/
+.regular-payment-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  position: relative;
+  top: 2.6rem;
+  left: 1rem;
+  max-width: var(--input-width);
+}
+
 .regular-payment {
-  display: inline-block;
-  position: absolute;
-  left: 15rem;
-  top: 11rem;
-  /* color: var(--color-blue); */
   color: #fdfeff;
 }
 
 .regular-payment-amount {
   position: relative;
-  display: inline-block;
-  margin-top: 3.5rem;
-  margin-left: 1rem;
-  /* color: var(--color-blue); */
+  /* display: inline-block; */
+  /* left: 15rem; */
+  /* margin-top: 3.5rem; */
+  /* margin-left: 1rem; */
   color: #ffffff;
   font-weight: 400;
   font-size: large;
   border-radius: 2px;
+  /* background-color: olive; */
+  width: fit-content;
+  border-bottom: solid 2.5px yellow;
 }
 
 .weekly-fortnightly-tag {
   display: inline-block;
   position: absolute;
   width: fit-content;
-  /* top: 188px; */
-  /* left: 105px; */
+  top: 10.85rem;
+  left: 10rem;
   border-radius: 5px;
   transition: all 0.4s ease;
 }
 
 .fortnightly {
   display: inline-block;
-  position: absolute;
+  /* position: absolute; */
   width: fit-content;
   padding: 5px;
-  left: 7rem;
-  top: 10.6rem;
-  /* bottom: 32px; */
-  font-size: var(--input-font-size);
   border: solid 2px var(--button--color);
   border-radius: 7px;
-  color: var(--button--color);
-  background-color: #ffffff;
+  /* color: var(--button--color); */
+  color: #ffffff;
+  /* background-color: #ffffff; */
   transition: all 0.4s ease;
 }
 
 .weekly {
   display: inline-block;
-  position: absolute;
   padding: 5px;
-  left: 7rem;
-  top: 10.6rem;
-  /* bottom: 32px; */
   border: solid 2px var(--button--color);
   border-radius: 7px;
   color: #ffffff;
-  font-size: var(--input-font-size);
-  background-color: var(--button--color);
+  /* background-color: var(--button--color); */
   transition: all 0.4s ease;
 }
 

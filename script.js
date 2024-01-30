@@ -102,8 +102,10 @@ const event_function = function () {
   //
 
   //
-  document.querySelector(".regular-payment-amount").innerHTML =
-    regular_amount.toFixed(2); // DOM Regular Payment // Display the regular payment amount - user feedback
+  document.querySelector(
+    ".regular-payment-amount"
+  ).innerHTML = `$ ${regular_amount.toFixed(2)}`;
+  // DOM Regular Payment // Display the regular payment amount - user feedback
   //
 
   if (frequency == 7) {
@@ -619,7 +621,7 @@ document.getElementById("clear_button").addEventListener("click", () => {
   document.getElementById("regular-payments-resume").innerText = "...";
   document.getElementById("additionalPaymentAmount").innerText = "...";
   document.getElementById("arrangement-total").innerText = "...";
-  document.querySelector(".regular-payment-amount").innerText = "";
+  document.querySelector(".regular-payment-amount").innerText = "...";
   document.querySelector(".min-pref-label").innerText = "Minimum";
 });
 
