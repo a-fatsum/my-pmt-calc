@@ -552,13 +552,9 @@ input[type="date"] + label {
 
 .regular-payment-amount {
   position: relative;
-  /* display: inline-block; */
-  /* left: 15rem; */
-  /* margin-top: 3.5rem; */
-  /* margin-left: 1rem; */
+
   color: #ffffff;
   font-weight: 400;
-  font-size: large;
   border-radius: 2px;
   /* background-color: olive; */
   width: fit-content;
