@@ -565,7 +565,7 @@ input[type="date"] + label {
   display: inline-block;
   position: absolute;
   width: fit-content;
-  top: 10.85rem;
+  top: 10.6rem;
   left: 10rem;
   border-radius: 5px;
   transition: all 0.4s ease;
