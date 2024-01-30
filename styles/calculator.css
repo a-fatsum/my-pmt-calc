@@ -503,7 +503,7 @@ input[type="checkbox"].frequency-input:checked + label::after {
   justify-content: space-between;
   justify-items: center;
   position: relative;
-  top: 2.5rem;
+  top: 2.8rem;
   right: 1.2rem;
 }
 
@@ -541,7 +541,7 @@ input[type="date"] + label {
   align-items: center;
   flex-direction: row-reverse;
   position: relative;
-  top: 2.6rem;
+  top: 3.3rem;
   left: 1rem;
   max-width: var(--input-width);
 }
@@ -565,7 +565,7 @@ input[type="date"] + label {
   display: inline-block;
   position: absolute;
   width: fit-content;
-  top: 10.6rem;
+  top: 11.3rem;
   left: 10rem;
   border-radius: 5px;
   transition: all 0.4s ease;
